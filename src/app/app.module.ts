@@ -11,6 +11,7 @@ import { MaterialModule } from './material/material.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CommonModule } from '@angular/common';
 import { AccountModule } from './account/account.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AccountModule } from './account/account.module';
     BrowserAnimationsModule,
     MaterialModule,
     AccountModule,
+    ComponentsModule
     
   
 
