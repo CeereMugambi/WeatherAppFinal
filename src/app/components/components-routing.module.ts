@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ComponentsModule } from './components.module';
+import { SubnavbarComponent } from './subnavbar/subnavbar.component';
 
 const routes: Routes = [
     {
-        path: '', component: ComponentsModule,
-      
-    
+        path: 'subnavbar', component: SubnavbarComponent,
+       
     },
    
 ];
@@ -15,4 +14,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class ProfileRoutingModule { }
+export class ComponentsRoutingModule { }
