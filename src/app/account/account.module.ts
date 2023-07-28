@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import Rea
 import { AccountRoutingModule } from './account-routing.component';
 import { LoginComponent } from './login/login.component';
 import { ComponentsModule } from '../components/components.module';
-import { BackgroundComponent } from '../components/background/background.component';
 
 
 
@@ -23,7 +22,6 @@ import { BackgroundComponent } from '../components/background/background.compone
     ComponentsModule,
   
   ],
-  // exports:[RegisterloginComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AccountModule { }
