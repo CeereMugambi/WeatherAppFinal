@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BackgroundComponent } from './background/background.component';
+import { CardComponent } from './card/card.component';
 
 
 
 
 @NgModule({
   declarations: [
-  
-    BackgroundComponent
+    BackgroundComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
@@ -16,6 +17,7 @@ import { BackgroundComponent } from './background/background.component';
   
   exports:[
     BackgroundComponent,
+    CardComponent
   ]
   
     
