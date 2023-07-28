@@ -12,6 +12,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { CommonModule } from '@angular/common';
 import { AccountModule } from './account/account.module';
 import { ComponentsModule } from './components/components.module';
+import { WelcomeRoutingModule } from './welcome/welcome-routing.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +25,12 @@ import { ComponentsModule } from './components/components.module';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
+    WelcomeRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     AccountModule,
-    ComponentsModule
+    ComponentsModule,
     
   
 
