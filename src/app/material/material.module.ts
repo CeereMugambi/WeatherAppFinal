@@ -1,8 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-
 
 
 import { MatButtonModule } from '@angular/material/button';
@@ -41,16 +37,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
-  declarations: [
-  ],
-
-  imports: [
-    CommonModule,
-    FormsModule,
-  ],
-  
   exports: [
-    FormsModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
