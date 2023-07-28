@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./subnavbar.component.sass']
 })
 export class SubnavbarComponent {
+  
 
 }
