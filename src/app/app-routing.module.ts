@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './account/login/login.component';
-import { RegistrationComponent } from './account/registration/registration.component';
 
 const AccountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const ComponentsModule = () => import('./components/components.module').then(x => x.ComponentsModule);
