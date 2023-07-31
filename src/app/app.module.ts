@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import { AccountModule } from './account/account.module';
 import { ComponentsModule } from './components/components.module';
 import { WelcomeRoutingModule } from './welcome/welcome-routing.component';
+import { HomeModule } from './home/home.module';
+import { homeRoutingModule } from './home/home-routing.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { WelcomeRoutingModule } from './welcome/welcome-routing.component';
     MaterialModule,
     AccountModule,
     ComponentsModule,
+    HomeModule,
+    homeRoutingModule
     
   
 
