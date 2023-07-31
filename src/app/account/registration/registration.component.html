@@ -1,1 +1,86 @@
 <p>registration works!</p>
+<h3 class="card-header">Register</h3>
+<div class="card-body">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="mb-3 col-2">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <mat-select formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+            <mat-option value=""></mat-option>
+            <mat-option value="Mr">Mr</mat-option>
+            <mat-option value="Mrs">Mrs</mat-option>
+            <mat-option value="Miss">Miss</mat-option>
+            <mat-option value="Ms">Ms</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+        </div>
+      </div>
+      <div class="mb-3 col-5">
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        </mat-form-field>
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="mb-3 col-5">
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        </mat-form-field>
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      </mat-form-field>
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col">
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        </mat-form-field>
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </div>
+      <div class="mb-3 col">
+        <mat-form-field appearance="fill">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+        </mat-form-field>
+        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+          <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 form-check">
+      <mat-checkbox formControlName="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }">
+        Accept Terms & Conditions
+      </mat-checkbox>
+      <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button [disabled]="submitting" color="primary">
+        <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+        Register
+      </button>
+      <a routerLink="../login" href="" class="btn btn-link">Cancel</a>
+    </div>
+  </form>
+</div>
