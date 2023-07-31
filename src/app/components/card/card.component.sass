@@ -3,26 +3,31 @@
   border-radius: 8px
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
   padding: 16px
-  width: 500px /* Adjust the width here */
-  height: 350px /* Adjust the height here */
+  background-color: #f9f9f9
+  max-width: 500px
+  height: 500px
   margin: 0 auto
-  margin-top: 40px // Adjust this value to vertically center the card
-  
+  margin-top: 25px
+  overflow: hidden
+  transition: box-shadow 0.3s ease
+
 
   .card-title 
-    text-align: centre
+    text-align: center
     font-size: 24px
     font-weight: bold
+    margin: 0
     margin-bottom: 10px
-    position: relative // To position the divider
-  
-  .divider 
-    width: 100%
-    margin: 8px auto
-    border: 0
-    border-top: 3px solid #393434
+    position: sticky 
+    top:50px
+    z-index: 3
+    padding: 10px
 
-.card-content 
-    margin-top: 30px
-
+  .card-content 
+    margin-top:30px
+    overflow: auto
+    max-height: 400px 
     
+
+  
+
