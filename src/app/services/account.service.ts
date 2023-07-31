@@ -5,19 +5,19 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
 
 import { environment } from 'src/app/environments/environment';
-import { Account } from 'src/app/models';
+import { IAccount } from 'src/app/models';
 const baseUrl = `${environment.apiUrl}/accounts`;
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private accountSubject: BehaviorSubject<Account | null>;
-    public account: Observable<Account | null>;
+    private accountSubject: BehaviorSubject<IAccount | null>;
+    public account: Observable<IAccount | null>;
 
     constructor(
         private router: Router,
         private http: HttpClient
     ) {
-        this.accountSubject = new BehaviorSubject<Account | null>(null);
+        this.accountSubject = new BehaviorSubject<IAccount | null>(null);
         this.account = this.accountSubject.asObservable();
     }
 
@@ -50,7 +50,7 @@ export class AccountService {
             }));
     }
 
-    register(account: Account) {
+    register(account: IAccount) {
         return this.http.post(`${baseUrl}/register`, account);
     }
 
@@ -71,11 +71,11 @@ export class AccountService {
     }
 
     getAll() {
-        return this.http.get<Account[]>(baseUrl);
+        return this.http.get<IAccount[]>(baseUrl);
     }
 
     getById(id: string) {
-        return this.http.get<Account>(`${baseUrl}/${id}`);
+        return this.http.get<IAccount>(`${baseUrl}/${id}`);
     }
 
     create(params: any) {
