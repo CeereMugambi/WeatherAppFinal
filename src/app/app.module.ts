@@ -1,6 +1,10 @@
 import { NgModule ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor,ErrorInterceptor } from './helpers';
+import { fakeBackendProvider } from './helpers';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +28,7 @@ import { WelcomeRoutingModule } from './welcome/welcome-routing.component';
     CommonModule,
     FormsModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     WelcomeRoutingModule,
     ReactiveFormsModule,
@@ -35,7 +40,15 @@ import { WelcomeRoutingModule } from './welcome/welcome-routing.component';
   
 
   ],
-  providers: [],
+  providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        
+        //provider for fake backend
+        fakeBackendProvider,
+        
+    
+  ],
   
   bootstrap: [AppComponent],
 
