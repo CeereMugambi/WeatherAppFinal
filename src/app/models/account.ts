@@ -1,6 +1,6 @@
 import { Role } from './role';
 
-export class Account {
+export class IAccount {
     id?: string;
     title?: string;
     firstName?: string;
