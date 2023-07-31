@@ -1,1 +1,17 @@
-<p>alert works!</p>
+<ng-container *ngIf="alerts.length">
+    <div class="container">
+        <div *ngFor="let alert of alerts" [ngClass]="cssClasses(alert)">
+          <mat-card>
+            <mat-card-content>
+              <span [innerHTML]="alert.message"></span>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-icon-button (click)="removeAlert(alert)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+  </ng-container>
+  
