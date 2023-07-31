@@ -1,4 +1,4 @@
-import { Role } from './role';
+import { IRole} from './role';
 
 export class IAccount {
     id?: string;
@@ -6,6 +6,6 @@ export class IAccount {
     firstName?: string;
     lastName?: string;
     email?: string;
-    role?: Role;
+    role?: IRole;
     jwtToken?: string;
 }
