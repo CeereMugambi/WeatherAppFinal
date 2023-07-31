@@ -1,9 +1,16 @@
 mat-toolbar 
-  position: fixed
+  position: sticky
   top: 0
   left: 0
   width: 100%
+  height: 50px
 
 button[mat-icon-button] 
-  margin-right: 8px
+  margin-right: 4px /* Reduce the right margin */
+  margin-left: 4px /* Reduce the left margin */
+  padding: 4px /* Reduce padding to make the button thinner */
+
+/* Optionally, you can reduce the font size for mat-icon-button */
+button[mat-icon-button] .mat-icon 
+  font-size: 18px
 
