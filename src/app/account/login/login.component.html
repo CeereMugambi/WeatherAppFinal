@@ -2,11 +2,9 @@
 <app-subnavbar></app-subnavbar>
 <app-card>
 
-<h1 class="title">Login</h1>
+<h2 class="title">Login</h2>
 <div class="card-body">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    
-    <div class="mb-3">
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
@@ -15,8 +13,6 @@
           <div *ngIf="f.email.errors.email">Invalid email format</div>
         </mat-error>
       </mat-form-field>
-    </div>
-    <div class="mb-3">
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
@@ -24,19 +20,16 @@
           <div *ngIf="f.password.errors.required">Password is required</div>
         </mat-error>
       </mat-form-field>
-    </div>
-    <div class="row">
-      <div class="mb-3 col">
         <button mat-raised-button color="primary" [disabled]="submitting">
           <span *ngIf="submitting" class="mat-spinner mat-spinner-sm me-1"></span>
           Login
         </button>
+        <div>
         <a routerLink="../registration" class="btn btn-link">Register</a>
-      </div>
-      <div class="mb-3 col text-end">
-        <a routerLink="../forgot-password" class="btn btn-link pe-0">Forgot Password?</a>
-      </div>
-    </div>
+        </div>
+        <div>
+          <a routerLink="../forgot-password" class="btn btn-link pe-0">Forgot Password?</a>
+        </div>
   </form>
 </div>
 </app-card>
