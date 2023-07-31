@@ -5,6 +5,7 @@ import { CardComponent } from './card/card.component';
 import { SubnavbarComponent } from './subnavbar/subnavbar.component';
 import { MaterialModule } from '../material/material.module';
 import { ComponentsRoutingModule } from './components-routing.module';
+import { AlertComponent } from './alert/alert.component';
 
 
 
@@ -13,7 +14,8 @@ import { ComponentsRoutingModule } from './components-routing.module';
   declarations: [
     BackgroundComponent,
     CardComponent,
-    SubnavbarComponent
+    SubnavbarComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
