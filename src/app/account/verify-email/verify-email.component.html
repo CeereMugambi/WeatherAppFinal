@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Verify Email</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="emailStatus == EmailStatus.Verifying">
+        Verifying...
+      </div>
+      <div *ngIf="emailStatus == EmailStatus.Failed">
+        Verification failed, you can also verify your account using the
+        <a routerLink="forgot-password">forgot password</a> page.
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
