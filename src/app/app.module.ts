@@ -1,14 +1,11 @@
-import { NgModule ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor,ErrorInterceptor } from './helpers';
+import { JwtInterceptor, ErrorInterceptor, appInitializer } from './helpers';
 import { fakeBackendProvider } from './helpers';
-
-
-
+import { AccountService } from './services';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
@@ -24,8 +21,7 @@ import { homeRoutingModule } from './home/home-routing.module';
   declarations: [
     AppComponent,
     WelcomeComponent,
-    ],
-    
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -39,23 +35,16 @@ import { homeRoutingModule } from './home/home-routing.module';
     AccountModule,
     ComponentsModule,
     HomeModule,
-    homeRoutingModule
-    
-  
-
+    homeRoutingModule,
   ],
   providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        
-        //provider for fake backend
-        fakeBackendProvider,
-        
-    
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // Provider for fake backend
+    fakeBackendProvider,
   ],
-  
   bootstrap: [AppComponent],
-
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}
