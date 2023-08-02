@@ -27,7 +27,8 @@ import { AlertComponent } from './alert/alert.component';
   exports:[
     BackgroundComponent,
     CardComponent,
-    SubnavbarComponent
+    SubnavbarComponent,
+    AlertComponent
   ]
   
     
