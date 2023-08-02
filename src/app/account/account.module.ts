@@ -6,13 +6,12 @@ import { AccountRoutingModule } from './account-routing.component';
 import { LoginComponent } from './login/login.component';
 import { ComponentsModule } from '../components/components.module';
 import { RegistrationComponent } from './registration/registration.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
 @NgModule({
   declarations: [ 
-    LoginComponent, RegistrationComponent, ForgotPasswordComponent,
+    LoginComponent, RegistrationComponent,
     ],
 
   imports: [
@@ -22,6 +21,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     FormsModule,
     AccountRoutingModule,
     ComponentsModule,
+
   
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
