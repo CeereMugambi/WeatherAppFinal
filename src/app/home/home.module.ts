@@ -4,6 +4,7 @@ import { MaterialModule } from '../material/material.module';
 import { homeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AccountModule } from '../account/account.module';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -15,7 +16,8 @@ import { AccountModule } from '../account/account.module';
     CommonModule,
     MaterialModule,
     homeRoutingModule,
-    AccountModule
+    AccountModule,
+    ComponentsModule
 
   ],
   exports:[
