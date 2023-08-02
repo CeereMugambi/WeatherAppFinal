@@ -1,37 +1,35 @@
 <app-background></app-background>
 <app-subnavbar></app-subnavbar>
 <app-card>
-
-<h2 class="title">Login</h2>
-<div class="card-body">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+  <h1 class="card-title">Login</h1>
+    <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        </mat-form-field>
         <mat-error *ngIf="submitted && f.email.errors">
           <div *ngIf="f.email.errors.required">Email is required</div>
-          <div *ngIf="f.email.errors.email">Invalid email format</div>
+          <div *ngIf="f.email.errors.email">Email is invalid</div>
         </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        </mat-form-field>
         <mat-error *ngIf="submitted && f.password.errors">
           <div *ngIf="f.password.errors.required">Password is required</div>
         </mat-error>
-      </mat-form-field>
-        <button mat-raised-button color="primary" [disabled]="submitting">
-          <span *ngIf="submitting" class="mat-spinner mat-spinner-sm me-1"></span>
-          Login
-        </button>
+
+          <button mat-raised-button color="primary" [disabled]="submitting">
+            <span *ngIf="submitting" class="mat-spinner mat-spinner-sm me-1"></span>
+            Login
+          </button>
+          <a mat-button routerLink="../registration">Register</a>
+        
         <div>
-        <a routerLink="../registration" class="btn btn-link">Register</a>
+          <a mat-button routerLink="../forgot-password">Forgot Password?</a>
         </div>
-        <div>
-          <a routerLink="../forgot-password" class="btn btn-link pe-0">Forgot Password?</a>
-        </div>
-  </form>
-</div>
+      
+    </form>
+    </div>
 </app-card>
-
-
