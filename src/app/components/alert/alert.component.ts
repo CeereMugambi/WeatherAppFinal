@@ -9,7 +9,9 @@ import { AlertService } from 'src/app/services';
 //@input can be passed data from parent component using alert tag
     //has params id as an identifier for alert and fade to describe if alert should fade out or not
 
-@Component({ selector: 'alert', templateUrl: 'alert.component.html' })
+@Component({ selector: 'alert',
+ templateUrl: 'alert.component.html'
+ })
 export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';
     @Input() fade = true;
