@@ -6,7 +6,7 @@ import { AlertComponent } from './alert/alert.component';
 const routes: Routes = [
    
         {path: 'subnavbar', component: SubnavbarComponent},
-        {path:'alert',component:AlertComponent},
+        {path: 'alert' ,component:AlertComponent},
        
    
 ];
