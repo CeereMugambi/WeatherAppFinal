@@ -5,6 +5,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { AccountService,AlertService } from 'src/app/services';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: () => {
                     // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
                     this.router.navigateByUrl(returnUrl);
                 },
                 error: error => {
