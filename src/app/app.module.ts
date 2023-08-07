@@ -13,15 +13,19 @@ import { AccountModule } from './account/account.module';
 import { ComponentsModule } from './components/components.module';
 import { WelcomeRoutingModule } from './welcome/welcome-routing.component';
 import { HomeModule } from './home/home.module';
+import { AccountService } from './services';
+import { fakeBackendProvider } from './helpers';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
+
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -34,8 +38,12 @@ import { HomeModule } from './home/home.module';
     HomeModule,
   ],
   providers: [
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+     // provider to create fake backend
+     fakeBackendProvider,
     
 
   ],
