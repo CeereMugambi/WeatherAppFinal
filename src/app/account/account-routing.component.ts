@@ -9,7 +9,7 @@ const routes: Routes = [
     
        {path: 'login',component:LoginComponent},
        {path: 'registration',component:RegistrationComponent},
-       {path:'verify-email',component:VerifyEmailComponent},
+       {path: 'verify-email',component:VerifyEmailComponent},
         
         
     
