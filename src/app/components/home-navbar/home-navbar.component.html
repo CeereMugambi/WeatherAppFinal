@@ -1,1 +1,44 @@
-<p>home-navbar works!</p>
+<mat-toolbar color="primary" class="mat-elevation-z6" *ngIf="account">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <button mat-icon-button (click)="toggleDropdown()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="/assets/logo.png" alt="Logo" class="navbar-logo">
+    </div>
+  
+    <div fxLayout="row" fxLayoutAlign="end center" [matMenuTriggerFor]="menu">
+      <button mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  
+    <mat-menu #menu="matMenu" yPosition="below">
+      <ng-container *ngIf="account.role === Role.Admin">
+        <a mat-menu-item routerLink="/admin" routerLinkActive="active">
+          <mat-icon>security</mat-icon>
+          <span>Admin</span>
+        </a>
+      </ng-container>
+      <a mat-menu-item routerLink="/profile" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-menu-item href="#">
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </a>
+      <a mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </a>
+    </mat-menu>
+  </mat-toolbar>
+  
+  <mat-toolbar color="primary">
+    <a mat-button routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      Home
+    </a>
+    <button mat-button (click)="logout()">Signout</button>
+  </mat-toolbar>
+  
