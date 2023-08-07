@@ -6,6 +6,7 @@ import { SubnavbarComponent } from './subnavbar/subnavbar.component';
 import { MaterialModule } from '../material/material.module';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { AlertComponent } from './alert/alert.component';
+import { HomeNavbarComponent } from './home-navbar/home-navbar.component';
 
 
 
@@ -15,7 +16,8 @@ import { AlertComponent } from './alert/alert.component';
     BackgroundComponent,
     CardComponent,
     SubnavbarComponent,
-    AlertComponent
+    AlertComponent,
+    HomeNavbarComponent
   ],
   imports: [
     CommonModule,
