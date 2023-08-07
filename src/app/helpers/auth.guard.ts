@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
+
+
 import { AccountService } from '../services';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard {
@@ -15,7 +17,7 @@ export class AuthGuard {
             // check if route is restricted by role
             if (route.data.roles && !route.data.roles.includes(account.role)) {
                 // role not authorized so redirect to home page
-                this.router.navigate(['/']);
+                this.router.navigate(['/home']);
                 return false;
             }
 
