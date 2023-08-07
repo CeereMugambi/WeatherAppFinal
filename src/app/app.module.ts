@@ -13,7 +13,6 @@ import { AccountModule } from './account/account.module';
 import { ComponentsModule } from './components/components.module';
 import { WelcomeRoutingModule } from './welcome/welcome-routing.component';
 import { HomeModule } from './home/home.module';
-import { AccountService } from './services';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,6 @@ import { AccountService } from './services';
     HomeModule,
   ],
   providers: [
-    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     
