@@ -30,7 +30,8 @@ import { HomeNavbarComponent } from './home-navbar/home-navbar.component';
     BackgroundComponent,
     CardComponent,
     SubnavbarComponent,
-    AlertComponent
+    AlertComponent,
+    HomeNavbarComponent
   ]
   
     
