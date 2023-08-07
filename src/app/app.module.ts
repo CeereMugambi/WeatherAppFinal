@@ -37,6 +37,7 @@ import { fakeBackendProvider } from './helpers';
     ComponentsModule,
     HomeModule,
   ],
+  
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
