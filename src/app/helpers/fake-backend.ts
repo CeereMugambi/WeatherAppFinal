@@ -5,6 +5,7 @@ import { delay, materialize, dematerialize } from 'rxjs/operators';
 
 import { AlertService } from '../services';
 import { IRole } from '../models';
+
 // array in local storage for accounts
 const accountsKey = 'angular-15-signup-verification-boilerplate-accounts';
 let accounts: any[] = JSON.parse(localStorage.getItem(accountsKey)!) || [];
