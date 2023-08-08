@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WelcomeAdminComponent } from './welcome-admin/welcome-admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports:[
     WelcomeAdminComponent,
     ListComponent
-  ]
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AdminModule { }
