@@ -4,6 +4,7 @@ import { WelcomeAdminComponent } from './welcome-admin/welcome-admin.component';
 import { WelcomeRoutingModule } from '../welcome/welcome-routing.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -15,7 +16,7 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    
+    ComponentsModule,
   
     ],
 
