@@ -1,29 +1,67 @@
-.mat-toolbar 
-  &.mat-elevation-z6 
-    z-index: 6 /* Adjust the z-index value as needed */
+.navbar-container 
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  padding-top:1px
+  padding-bottom: 0.05px
 
-    height: 50px /* Adjust the height as needed */
-    padding: 0 16px /* Add horizontal padding */
-  
+//  hamburger menu
+mat-toolbar.mat-elevation-z6 
+  display: flex
+  justify-content: space-between
+  height: 48px
+  align-items: center
 
   .navbar-logo 
-    max-height: 40px/* Adjust the logo size as needed */
-    margin-right: 10px /* Add margin between logo and menu icon */
-    
-    .mat-toolbar-row 
-    height: 100% /* Ensure the toolbar takes up full height */
-    align-items: center /* Vertically center items */
+    width: 40px 
+    height: 10
+    margin-right: 900px
 
-
-  .mat-menu-panel 
-    width: 200px /* Adjust the dropdown menu width as needed */
+  .mat-button 
+    font-size: 20px
+    cursor: pointer
+    height: auto
   
+  .spacer 
+    flex: 1.5
 
-  .mat-menu-item 
-    display: flex
-    align-items: center
+.mat-menu-content 
+  display: flex
+  flex-direction: column
 
-    mat-icon 
-      margin-right: 8px /* Add spacing between icon and text */
+
+// Styles for the menu items inside the dropdow
+
+.mat-menu-item 
+  display: flex
+  align-items: center
+  padding: 8px 16px
+  color: #333 /* Text color for the dropdown items */
+  text-decoration: none /* Remove underlines from anchor links */
+  transition: background-color 0.2s
+
+  hover 
+    background-color: #f0f0f0 /* Background color when hovering over the items */
+
+
+  .mat-icon 
+    margin-right: 8px
+
+  //navbar buttons
+  .navbar-buttons 
+  display: flex
+  align-items: center
+
+
+.navbar-buttons a,
+.navbar-buttons button 
+  cursor: pointer
+  margin-right: 16px
+
+
+
+
+
 
 
