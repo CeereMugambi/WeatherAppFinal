@@ -5,12 +5,14 @@ import { WelcomeRoutingModule } from '../welcome/welcome-routing.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ComponentsModule } from '../components/components.module';
+import { ListComponent } from './list/list.component';
 
 
 
 @NgModule({
   declarations: [
-    WelcomeAdminComponent
+    WelcomeAdminComponent,
+    ListComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { ComponentsModule } from '../components/components.module';
     ],
 
   exports:[
-    WelcomeAdminComponent
+    WelcomeAdminComponent,
+    ListComponent
   ]
 })
 export class AdminModule { }
