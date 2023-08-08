@@ -15,6 +15,7 @@ import { WelcomeRoutingModule } from './welcome/welcome-routing.component';
 import { HomeModule } from './home/home.module';
 import { AccountService } from './services';
 import { fakeBackendProvider } from './helpers';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { fakeBackendProvider } from './helpers';
     AccountModule,
     ComponentsModule,
     HomeModule,
+    AdminModule,
   ],
   
   providers: [
