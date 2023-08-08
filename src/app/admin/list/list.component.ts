@@ -4,8 +4,9 @@ import { first } from 'rxjs/operators';
 
 import { AccountService } from 'src/app/services';
 
-@Component({ templateUrl: 'list.component.html' ,
-styleUrls: ['list.component.sass'],
+@Component({ selector: 'app-list',
+templateUrl: './list.component.html',
+styleUrls: ['./list.component.sass']
 })
 export class ListComponent implements OnInit {
     accounts?: any[];
