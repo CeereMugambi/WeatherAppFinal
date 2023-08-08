@@ -5,8 +5,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ComponentsModule } from '../components/components.module';
 import { ListComponent } from './list/list.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
 
 
 @NgModule({
@@ -19,8 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminRoutingModule,
     MaterialModule,
     ComponentsModule,
-    ReactiveFormsModule,
-  
+
     ],
 
   exports:[
