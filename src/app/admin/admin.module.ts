@@ -24,6 +24,5 @@ import { ListComponent } from './list/list.component';
     WelcomeAdminComponent,
     ListComponent
   ],
-  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AdminModule { }
