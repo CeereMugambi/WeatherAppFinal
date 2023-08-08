@@ -1,38 +1,50 @@
 <app-background></app-background>
-<app-subnavbar></app-subnavbar>
+<app-home-navbar></app-home-navbar>
 <h2>Accounts</h2>
 <p><b>All accounts from secure (admin only) API endpoint:</b></p>
-<a routerLink="add" mat-raised-button color="primary" class="mb-2">Create Account</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th style="width:30%">Name</th>
-            <th style="width:30%">Email</th>
-            <th style="width:30%">Role</th>
-            <th style="width:10%"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <ng-container *ngIf="accounts">
-            <tr *ngFor="let account of accounts">
-                <td class="align-middle">{{account.title}} {{account.firstName}} {{account.lastName}}</td>
-                <td class="align-middle">{{account.email}}</td>
-                <td class="align-middle">{{account.role}}</td>
-                <td style="white-space: nowrap">
-                    <a routerLink="edit/{{account.id}}" mat-raised-button color="primary" class="me-1">Edit</a>
-                    <button mat-raised-button color="warn" (click)="deleteAccount(account.id)" [disabled]="account.isDeleting">
-                        <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
-                        <span *ngIf="!account.isDeleting">Delete</span>
-                    </button>
-                </td>
-            </tr>
-        </ng-container>
-        <ng-container *ngIf="!accounts">
-            <tr>
-                <td colspan="4" class="text-center">
-                    <span class="spinner-border spinner-border-lg align-center"></span>
-                </td>
-            </tr>
-        </ng-container>
-    </tbody>
-</table>
+<a routerLink="welcome" mat-raised-button color="primary" class="mb-2">Create Account</a>
+<mat-table class="mat-elevation-z8" [dataSource]="dataSource">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef style="width: 30%">Name</th>
+    <td mat-cell *matCellDef="let account" class="align-middle">{{account.title}} {{account.firstName}} {{account.lastName}}</td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef style="width: 30%">Email</th>
+    <td mat-cell *matCellDef="let account" class="align-middle">{{account.email}}</td>
+  </ng-container>
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef style="width: 30%">Role</th>
+    <td mat-cell *matCellDef="let account" class="align-middle">{{account.role}}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef style="width: 10%"></th>
+    <td mat-cell *matCellDef="let account" class="align-middle">
+      <a routerLink="edit/{{account.id}}" mat-button color="primary" class="me-1">Edit</a>
+      <button mat-button color="warn" (click)="deleteAccount(account.id)" [disabled]="account.isDeleting">
+        <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
+        <span *ngIf="!account.isDeleting">Delete</span>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['name', 'email', 'role', 'actions']"></tr>
+  <tr mat-row *matRowDefOf="let account of accounts" [ngClass]="{ 'loading-row': !account }">
+    <ng-container *ngIf="account; else loadingRow">
+      <td mat-cell class="align-middle">{{account.title}} {{account.firstName}} {{account.lastName}}</td>
+      <td mat-cell class="align-middle">{{account.email}}</td>
+      <td mat-cell class="align-middle">{{account.role}}</td>
+      <td mat-cell class="align-middle">
+        <a routerLink="edit/{{account.id}}" mat-button color="primary" class="me-1">Edit</a>
+        <button mat-button color="warn" (click)="deleteAccount(account.id)" [disabled]="account.isDeleting">
+          <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
+          <span *ngIf="!account.isDeleting">Delete</span>
+        </button>
+      </td>
+    </ng-container>
+    <ng-template #loadingRow>
+      <td mat-cell [attr.colspan]="4" class="text-center">
+        <span class="spinner-border spinner-border-lg align-center"></span>
+      </td>
+    </ng-template>
+  </tr>
+</mat-table>

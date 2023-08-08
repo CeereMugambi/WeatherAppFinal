@@ -1,0 +1,52 @@
+
+/* General styles for the heading and paragraph elements */
+h2 
+  font-size: 24px
+  font-weight: bold
+  margin-bottom: 8px
+
+p 
+  margin-top: 0
+
+
+/* Style for the "Create Account" button */
+a.mat-raised-button 
+  margin-bottom: 16px
+
+
+/* Style for the mat-table */
+.mat-table 
+  width: 100%
+  border-collapse: collapse
+  &.mat-elevation-z8 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) /* Replace with your desired elevation */  
+
+  /* Style for the table headers */
+  .mat-header-cell 
+    font-weight: bold
+    padding: 8px 16px
+    border-bottom: 1px solid #ccc
+  
+
+  /* Style for the table data cells */
+  .mat-cell 
+    padding: 8px 16px
+    border-bottom: 1px solid #ccc
+    &.align-middle 
+      vertical-align: middle
+   
+  /* Style for the actions buttons (Edit and Delete) in the table */
+  td.mat-cell.align-middle 
+    .mat-button 
+      margin-right: 4px
+      &.me-1 
+        margin-right: 16px
+      
+  /* Style for the loading row when data is being fetched */
+  tr.loading-row 
+    td.mat-cell 
+      text-align: center
+      padding: 32px 0
+      &.align-middle 
+        vertical-align: middle
+   
