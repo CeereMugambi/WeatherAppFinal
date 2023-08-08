@@ -1,17 +1,13 @@
-<mat-toolbar color="primary" class="mat-elevation-z6" *ngIf="account">
+<div class="navbar-container">
+  <mat-toolbar color="primary" class="mat-elevation-z6" *ngIf="account">
     <div fxLayout="row" fxLayoutAlign="start center">
-      <button mat-icon-button (click)="toggleDropdown()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <img src="/assets/icon2.png" alt="Logo" class="navbar-logo">
+      <div [matMenuTriggerFor]="menu" fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <img src="/assets/icon2.png" alt="Logo" class="navbar-logo">
+      </div>
     </div>
-  
-    <div fxLayout="row" fxLayoutAlign="end center" [matMenuTriggerFor]="menu">
-      <button mat-icon-button>
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </div>
-  
     <mat-menu #menu="matMenu" yPosition="below">
       <ng-container *ngIf="account.role === Role.Admin">
         <a mat-menu-item routerLink="/admin" routerLinkActive="active">
@@ -33,12 +29,12 @@
         <span>Logout</span>
       </a>
     </mat-menu>
-  </mat-toolbar>
-  
-  <mat-toolbar color="primary">
+    <div class="navbar-buttons">
     <a mat-button routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      Home
-    </a>
-    <button mat-button (click)="logout()">Signout</button>
+        Home
+      </a>
+      <span class="spacer"></span>
+      <button mat-button (click)="logout()">Logout</button>
+</div>
   </mat-toolbar>
-  
+  </div>
