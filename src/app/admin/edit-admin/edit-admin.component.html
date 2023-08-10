@@ -1,5 +1,6 @@
 <app-background></app-background>
 <app-home-navbar></app-home-navbar>
+<app-subnavbar></app-subnavbar>
 <app-card>
 <h1>{{ title }}</h1>
 <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -72,7 +73,7 @@
       <span *ngIf="submitting" class="mat-spinner"></span>
       Save
     </button>
-    <a mat-button routerLink="/admin/accounts">Cancel</a>
+    <a mat-button routerLink="/admin/list">Cancel</a>
   </div>
 </form>
 <div *ngIf="loading" class="text-center m-5">
