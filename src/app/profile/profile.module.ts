@@ -22,7 +22,8 @@ import { UpdateComponent } from './update/update.component';
     profileRoutingModule
   ],
   exports:[
-    DetailsComponent
+    DetailsComponent,
+    UpdateComponent
   ]
 })
 export class ProfileModule { }
