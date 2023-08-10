@@ -6,7 +6,11 @@ import { first } from 'rxjs/operators';
 import { AccountService,AlertService } from 'src/app/services';
 import { MustMatch } from 'src/app/helpers';
 
-@Component({ templateUrl: 'edit-admin.component.html' })
+@Component({ 
+  templateUrl: 'edit-admin.component.html',
+  styleUrls: ['./edit-admin.component.sass'],
+ })
+ 
 export class EditAdminComponent implements OnInit {
     form!: FormGroup;
     id?: string;
