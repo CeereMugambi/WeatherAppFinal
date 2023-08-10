@@ -14,6 +14,12 @@ input.mat-input-element
 .mat-error
   color: red
   font-size: 14px
+  
+
+.button-container 
+  margin-top: 40px/* Adjust this value to control the spacing */
+  display: flex
+  flex-direction: column
 
 button.mat-raised-button
   background-color: #007bff
@@ -28,15 +34,24 @@ button.mat-raised-button:disabled
   background-color: #ccc
   cursor: not-allowed
 
-a.btn-link
+.button-link
+  margin-top: 20px/* Adjust this value as needed */
+  display: flex
+  flex-direction: column
+  align-items: center
+
+a.mat-button-link 
   color: #007bff
   text-decoration: none
   font-size: 14px
   cursor: pointer
   transition: color 0.3s ease
 
-a.btn-link:hover
+a.mat-button-link:hover
   color: #0056b3
+
+.spaced-link
+  margin-top: 8px
 
 div.text-end
   font-size: 14px
