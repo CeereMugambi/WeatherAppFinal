@@ -5,12 +5,14 @@ import { MaterialModule } from '../material/material.module';
 import { ComponentsModule } from '../components/components.module';
 import { AccountModule } from '../account/account.module';
 import { profileRoutingModule } from './profile-routing.module';
+import { UpdateComponent } from './update/update.component';
 
 
 
 @NgModule({
   declarations: [
-    DetailsComponent
+    DetailsComponent,
+    UpdateComponent
   ],
   imports: [
     CommonModule,
