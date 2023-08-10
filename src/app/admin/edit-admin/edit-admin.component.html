@@ -1,0 +1,80 @@
+<app-background></app-background>
+<app-home-navbar></app-home-navbar>
+
+<h1>{{ title }}</h1>
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field fxFlex="20%">
+      <mat-label>Title</mat-label>
+      <mat-select formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        <mat-option value=""></mat-option>
+        <mat-option value="Mr">Mr</mat-option>
+        <mat-option value="Mrs">Mrs</mat-option>
+        <mat-option value="Miss">Miss</mat-option>
+        <mat-option value="Ms">Ms</mat-option>
+      </mat-select>
+      <mat-error *ngIf="submitted && f.title.errors">Title is required</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="40%">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+      <mat-error *ngIf="submitted && f.firstName.errors">First Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="40%">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+      <mat-error *ngIf="submitted && f.lastName.errors">Last Name is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field fxFlex="70%">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <mat-error *ngIf="submitted && f.email.errors">
+        <ng-container *ngIf="f.email.errors.required">Email is required</ng-container>
+        <ng-container *ngIf="f.email.errors.email">Email must be a valid email address</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="30%">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+        <mat-option value=""></mat-option>
+        <mat-option value="User">User</mat-option>
+        <mat-option value="Admin">Admin</mat-option>
+      </mat-select>
+      <mat-error *ngIf="submitted && f.role.errors">Role is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div *ngIf="id">
+    <h3 class="pt-3">Change Password</h3>
+    <p>Leave blank to keep the same password</p>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field fxFlex="50%">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+      <mat-error *ngIf="submitted && f.password.errors">
+        <ng-container *ngIf="f.password.errors.required">Password is required</ng-container>
+        <ng-container *ngIf="f.password.errors.minlength">Password must be at least 6 characters</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="50%">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+      <mat-error *ngIf="submitted && f.confirmPassword.errors">
+        <ng-container *ngIf="f.confirmPassword.errors.required">Confirm Password is required</ng-container>
+        <ng-container *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="mb-3">
+    <button mat-raised-button [disabled]="submitting" color="primary">
+      <span *ngIf="submitting" class="mat-spinner"></span>
+      Save
+    </button>
+    <a mat-button routerLink="/admin/accounts">Cancel</a>
+  </div>
+</form>
+<div *ngIf="loading" class="text-center m-5">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
