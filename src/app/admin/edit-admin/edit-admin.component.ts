@@ -10,7 +10,7 @@ import { MustMatch } from 'src/app/helpers';
   templateUrl: 'edit-admin.component.html',
   styleUrls: ['./edit-admin.component.sass'],
  })
- 
+
 export class EditAdminComponent implements OnInit {
     form!: FormGroup;
     id?: string;
@@ -89,7 +89,7 @@ export class EditAdminComponent implements OnInit {
             .subscribe({
                 next: () => {
                     this.alertService.success(message, { keepAfterRouteChange: true });
-                    this.router.navigateByUrl('/admin/accounts');
+                    this.router.navigateByUrl('/admin/list');
                 },
                 error: error => {
                     this.alertService.error(error);
