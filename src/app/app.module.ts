@@ -16,6 +16,8 @@ import { HomeModule } from './home/home.module';
 import { AccountService } from './services';
 import { fakeBackendProvider } from './helpers';
 import { AdminModule } from './admin/admin.module';
+import { ProfileModule } from './profile/profile.module';
+import { profileRoutingModule } from './profile/profile-routing.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { AdminModule } from './admin/admin.module';
     ComponentsModule,
     HomeModule,
     AdminModule,
+    ProfileModule,
+    profileRoutingModule
   ],
   
   providers: [
