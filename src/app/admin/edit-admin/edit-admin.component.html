@@ -1,5 +1,6 @@
 <app-background></app-background>
 <app-home-navbar></app-home-navbar>
+<app-card>
 <h1>{{ title }}</h1>
 <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div fxLayout="row" fxLayoutGap="20px">
@@ -77,3 +78,4 @@
 <div *ngIf="loading" class="text-center m-5">
   <mat-spinner diameter="50"></mat-spinner>
 </div>
+</app-card>
