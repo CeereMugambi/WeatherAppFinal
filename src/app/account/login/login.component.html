@@ -7,27 +7,34 @@
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input matInput type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <mat-error *ngIf="submitted && f.email.errors">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email" class ="warning-message">Email is invalid</div>
+          </mat-error>
         </mat-form-field>
-        <mat-error *ngIf="submitted && f.email.errors">
-          <div *ngIf="f.email.errors.required">Email is required</div>
-          <div *ngIf="f.email.errors.email">Email is invalid</div>
-        </mat-error>
+        
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
           <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <mat-error *ngIf="submitted && f.password.errors">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors?.specialCharacters" class="warning-message">
+            Password cannot contain special characters</div>
+          </mat-error>
         </mat-form-field>
-        <mat-error *ngIf="submitted && f.password.errors">
-          <div *ngIf="f.password.errors.required">Password is required</div>
-        </mat-error>
-
+        
+        <div class = button-container>
           <button mat-raised-button color="primary" [disabled]="submitting">
             <span *ngIf="submitting"></span>
             login
           </button>
-          <a mat-button routerLink="../registration">Register</a>
+          <div class = button-link>
+          <a mat-button-link routerLink="../registration">Register</a>
         
         <div>
-          <a mat-button routerLink="../forgot-password">Forgot Password?</a>
+          <a mat-button-link class = "spaced-link" routerLink="../forgot-password">Forgot Password?</a>
+          </div>
+        </div>
         </div>
       
     </form>
