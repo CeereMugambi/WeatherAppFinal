@@ -2,7 +2,7 @@
 <app-home-navbar></app-home-navbar>
 <h2>Accounts</h2>
 <p><b>All accounts from secure (admin only) API endpoint:</b></p>
-<a routerLink="welcome" mat-raised-button color="primary" class="mb-2">Create Account</a>
+<a routerLink="/add" mat-raised-button color="primary" class="mb-2">Create Account</a>
 <mat-table class="mat-elevation-z8" [dataSource]="dataSource">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef style="width: 30%">Name</th>
@@ -34,7 +34,7 @@
       <td mat-cell class="align-middle">{{account.email}}</td>
       <td mat-cell class="align-middle">{{account.role}}</td>
       <td mat-cell class="align-middle">
-        <a routerLink="edit/{{account.id}}" mat-button color="primary" class="me-1">Edit</a>
+        <a routerLink="edit-admin/{{account.id}}" mat-button color="primary" class="me-1">Edit</a>
         <button mat-button color="warn" (click)="deleteAccount(account.id)" [disabled]="account.isDeleting">
           <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
           <span *ngIf="!account.isDeleting">Delete</span>
