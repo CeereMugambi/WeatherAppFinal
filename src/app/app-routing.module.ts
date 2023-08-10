@@ -10,9 +10,6 @@ const AdminModule = ()=>import('./admin/admin.module').then(x=>x.AdminModule)
 const ProfileModule = ()=>import('./profile/profile.module').then(x=>x.ProfileModule)
 
 
-
-
-
 const routes: Routes = [
   {path:'account',loadChildren:AccountModule},
   {path:'admin',loadChildren:AdminModule, canActivate: [AuthGuard], data: { roles: [IRole.Admin] } },
