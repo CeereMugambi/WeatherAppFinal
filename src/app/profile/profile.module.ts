@@ -4,6 +4,7 @@ import { DetailsComponent } from './details/details.component';
 import { MaterialModule } from '../material/material.module';
 import { ComponentsModule } from '../components/components.module';
 import { AccountModule } from '../account/account.module';
+import { profileRoutingModule } from './profile-routing.module';
 
 
 
@@ -16,6 +17,7 @@ import { AccountModule } from '../account/account.module';
     MaterialModule,
     ComponentsModule,
     AccountModule,
+    profileRoutingModule
   ],
   exports:[
     DetailsComponent
