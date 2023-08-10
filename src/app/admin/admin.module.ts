@@ -5,18 +5,22 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ComponentsModule } from '../components/components.module';
 import { ListComponent } from './list/list.component';
+import { EditAdminComponent } from './edit-admin/edit-admin.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     WelcomeAdminComponent,
-    ListComponent
+    ListComponent,
+    EditAdminComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
     ComponentsModule,
+    ReactiveFormsModule
 
     ],
 
