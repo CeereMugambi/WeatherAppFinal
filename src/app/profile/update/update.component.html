@@ -1,3 +1,6 @@
+<app-background></app-background>
+<app-subnavbar></app-subnavbar>
+<app-card>
 <h1>Update Profile</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="row">
@@ -63,15 +66,16 @@
       </mat-error>
     </div>
   </div>
-  <div class="mb-3">
+  <div class="button-container">
     <button mat-raised-button type="submit" [disabled]="submitting">
       <span *ngIf="submitting" class="mat-progress-spinner"></span>
       Update
     </button>
-    <button mat-raised-button type="button" (click)="onDelete()" [disabled]="deleting" class="btn btn-danger">
+    <button mat-raised-button type="button" (click)="onDelete()" [disabled]="deleting">
       <span *ngIf="deleting" class="mat-progress-spinner"></span>
       Delete
     </button>
-    <a routerLink="../" href="" class="btn btn-link">Cancel</a>
+    <a routerLink="../" href="" class="cancel-link">Cancel</a>
   </div>
 </form>
+</app-card>
