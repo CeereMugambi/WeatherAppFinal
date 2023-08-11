@@ -3,8 +3,6 @@
 <app-card>
 <h1>Update Profile</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="row">
-    <div class="mb-3 col-2">
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
         <mat-select formControlName="title">
@@ -16,23 +14,16 @@
         </mat-select>
       </mat-form-field>
       <mat-error *ngIf="submitted && f.title.errors">Title is required</mat-error>
-    </div>
-    <div class="mb-3 col-5">
       <mat-form-field appearance="fill">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstName" />
       </mat-form-field>
       <mat-error *ngIf="submitted && f.firstName.errors">First Name is required</mat-error>
-    </div>
-    <div class="mb-3 col-5">
       <mat-form-field appearance="fill">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" />
       </mat-form-field>
       <mat-error *ngIf="submitted && f.lastName.errors">Last Name is required</mat-error>
-    </div>
-  </div>
-  <div class="mb-3">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" />
@@ -41,11 +32,8 @@
         <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
       </mat-error>
     </mat-form-field>
-  </div>
-  <h3 class="pt-3">Change Password</h3>
+  <h1 class="message">Change Password</h1>
   <p>Leave blank to keep the same password</p>
-  <div class="row">
-    <div class="mb-3 col">
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" />
@@ -54,8 +42,6 @@
         <div *ngIf="f.password.errors.required">Password is required</div>
         <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
       </mat-error>
-    </div>
-    <div class="mb-3 col">
       <mat-form-field appearance="fill">
         <mat-label>Confirm Password</mat-label>
         <input matInput type="password" formControlName="confirmPassword" />
@@ -64,8 +50,6 @@
         <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
         <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
       </mat-error>
-    </div>
-  </div>
   <div class="button-container">
     <button mat-raised-button type="submit" [disabled]="submitting" color="primary">
       <span *ngIf="submitting" class="mat-progress-spinner"></span>
