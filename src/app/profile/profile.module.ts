@@ -6,6 +6,7 @@ import { ComponentsModule } from '../components/components.module';
 import { AccountModule } from '../account/account.module';
 import { profileRoutingModule } from './profile-routing.module';
 import { UpdateComponent } from './update/update.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,8 @@ import { UpdateComponent } from './update/update.component';
     MaterialModule,
     ComponentsModule,
     AccountModule,
-    profileRoutingModule
+    profileRoutingModule,
+    ReactiveFormsModule
   ],
   exports:[
     DetailsComponent,
