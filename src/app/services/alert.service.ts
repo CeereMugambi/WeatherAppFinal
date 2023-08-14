@@ -38,18 +38,36 @@ export class AlertService {
     alert(alert: Alert) {
         alert.id = alert.id || this.defaultId;
         alert.autoClose = alert.autoClose === undefined ? true : alert.autoClose;
-    
-        if (alert.autoClose) {
+
+        if (alert.autoClose && alert.message) {
             const duration = alert.fade ? 250 : 3000;
-            // Check if 'alert.message' is defined before displaying the snackbar
-            if (alert.message) {
-                this.snackBar.open(alert.message, 'Close', { duration });
+
+            // Determine panelClass based on the alert type
+            let panelClass = '';
+            switch (alert.type) {
+                case AlertType.Success:
+                    panelClass = 'success-snackbar';
+                    break;
+                case AlertType.Error:
+                    panelClass = 'error-snackbar';
+                    break;
+                case AlertType.Info:
+                    panelClass = 'info-snackbar';
+                    break;
+                case AlertType.Warning:
+                    panelClass = 'warning-snackbar';
+                    break;
             }
+
+            this.snackBar.open(alert.message, 'Close', {
+                duration,
+                panelClass // Apply the appropriate panelClass
+            });
         }
-    
+
         this.subject.next(alert);
     }
-    // clear alerts
+
     clear(id = this.defaultId) {
         this.subject.next(new Alert({ id }));
     }
