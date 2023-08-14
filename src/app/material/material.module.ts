@@ -56,7 +56,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatRippleModule,
     MatSelectModule,
     MatSidenavModule,
-    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatTabsModule,
@@ -70,7 +69,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatGridListModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatTooltipModule,    
+    MatTooltipModule, 
+    MatSnackBarModule   
 
 
     
