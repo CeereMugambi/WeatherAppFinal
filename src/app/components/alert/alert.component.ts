@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { IAlert,IAlertType } from 'src/app/models';
+import { Alert,AlertType} from 'src/app/models';
 import { AlertService } from 'src/app/services';
-
 //metadata for the compoment
 //has lifecycle hooks for initialization and destruction
 //@input can be passed data from parent component using alert tag
@@ -17,7 +16,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     //alerts array holds the alert messages to be displayed.
     //Subscription objects from the rxjs library used to unsubscribe from observables to avoid memory leaks.
-    alerts: IAlert[] = [];
+    alerts: Alert[] = [];
     alertSubscription!: Subscription;
     routeSubscription!: Subscription;
 
@@ -62,7 +61,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.routeSubscription.unsubscribe();
     }
 
-    removeAlert(alert: IAlert) {
+    removeAlert(alert: Alert) {
         // check if already removed to prevent error on auto close
         if (!this.alerts.includes(alert)) return;
 
@@ -80,16 +79,16 @@ export class AlertComponent implements OnInit, OnDestroy {
         }
     }
 
-    cssClasses(alert: IAlert) {
+    cssClasses(alert: Alert) {
         if (!alert) return;
 
         const classes = ['alert', 'alert-dismissible', 'mt-4', 'container'];
 
         const alertTypeClass = {
-            [IAlertType.Success]: 'alert-success',
-            [IAlertType.Error]: 'alert-danger',
-            [IAlertType.Info]: 'alert-info',
-            [IAlertType.Warning]: 'alert-warning'
+            [AlertType.Success]: 'alert-success',
+            [AlertType.Error]: 'alert-danger',
+            [AlertType.Info]: 'alert-info',
+            [AlertType.Warning]: 'alert-warning'
         }
 
         if (alert.type !== undefined) {
