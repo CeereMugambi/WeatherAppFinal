@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
 
 import { AlertService } from '../services';
 import { IRole } from '../models';
-
 // array in local storage for accounts
 const accountsKey = 'angular-15-signup-verification-boilerplate-accounts';
 let accounts: any[] = JSON.parse(localStorage.getItem(accountsKey)!) || [];
@@ -28,7 +27,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return refreshToken();
                 case url.endsWith('/accounts/revoke-token') && method === 'POST':
                     return revokeToken();
-                case url.endsWith('/accounts/register') && method === 'POST':
+                case url.endsWith('/accounts/registration') && method === 'POST':
                     return register();
                 case url.endsWith('/accounts/verify-email') && method === 'POST':
                     return verifyEmail();
