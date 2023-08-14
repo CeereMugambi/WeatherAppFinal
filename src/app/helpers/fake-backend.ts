@@ -1,9 +1,9 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { AlertService } from '../services';
 import { IRole } from '../models';
 // array in local storage for accounts
 const accountsKey = 'angular-15-signup-verification-boilerplate-accounts';
@@ -11,11 +11,11 @@ let accounts: any[] = JSON.parse(localStorage.getItem(accountsKey)!) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
-    constructor(private alertService: AlertService) { }
+    constructor(private snackBar: MatSnackBar) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = request;
-        const alertService = this.alertService;
+        // const alertService = this.alertService;
 
         return handleRoute();
 
@@ -59,7 +59,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const { email, password } = body;
             const account = accounts.find(x => x.email === email && x.password === password && x.isVerified);
             
-            if (!account) return error('Email or password is incorrect');
+            if (!account) {
+                displaySnackbar('Email or password is incorrect', 'error-snackbar');
+                return error('Email or password is incorrect');
+            }
 
             // add refresh token to account
             account.refreshTokens.push(generateRefreshToken());
@@ -78,7 +81,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             const account = accounts.find(x => x.refreshTokens.includes(refreshToken));
             
-            if (!account) return unauthorized();
+          if (!refreshToken) {
+                displaySnackbar('Refresh token not found', 'error-snackbar');
+                return unauthorized();
+            }
 
             // replace old refresh token with a new one and save
             account.refreshTokens = account.refreshTokens.filter((x: any) => x !== refreshToken);
@@ -106,19 +112,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function register() {
             const account = body;
-
+        
+            // Check if an account with the provided email already exists
             if (accounts.find(x => x.email === account.email)) {
-                // display email already registered "email" in alert
-                setTimeout(() => {
-                    alertService.info(`
-                        <h4>Email Already Registered</h4>
-                        <p>Your email ${account.email} is already registered.</p>
-                        <p>If you don't know your password please visit the <a href="${location.origin}/account/forgot-password">forgot password</a> page.</p>
-                        <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
-                    `, { autoClose: false });
-                }, 1000);
-
-                // always return ok() response to prevent email enumeration
+                displaySnackbar('Email Already Registered', 'error-snackbar');
                 return ok();
             }
 
@@ -141,13 +138,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // display verification email in alert
             setTimeout(() => {
                 const verifyUrl = `${location.origin}/account/verify-email?token=${account.verificationToken}`;
-                alertService.info(`
+                displaySnackbar(`
                     <h4>Verification Email</h4>
                     <p>Thanks for registering!</p>
                     <p>Please click the below link to verify your email address:</p>
                     <p><a href="${verifyUrl}">${verifyUrl}</a></p>
                     <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
-                `, { autoClose: false });
+                `, 'info-snackbar')
             }, 1000);
 
             return ok();
@@ -157,8 +154,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const { token } = body;
             const account = accounts.find(x => !!x.verificationToken && x.verificationToken === token);
             
-            if (!account) return error('Verification failed');
-            
+            if (!account) {
+                displaySnackbar('Verification failed', 'error-snackbar');
+                return error('Verification has failed');
+            }
             // set is verified flag to true if token is valid
             account.isVerified = true;
             localStorage.setItem(accountsKey, JSON.stringify(accounts));
@@ -181,12 +180,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // display password reset email in alert
             setTimeout(() => {
                 const resetUrl = `${location.origin}/account/reset-password?token=${account.resetToken}`;
-                alertService.info(`
+                displaySnackbar(`
                     <h4>Reset Password Email</h4>
                     <p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
                     <p><a href="${resetUrl}">${resetUrl}</a></p>
                     <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
-                `, { autoClose: false });
+                `,  'info-snackbar');
             }, 1000);
 
             return ok();
@@ -246,6 +245,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             const account = body;
             if (accounts.find(x => x.email === account.email)) {
+                const errorMessage = `Email ${account.email} is already registered`;displaySnackbar(errorMessage, 'error-snackbar');
                 return error(`Email ${account.email} is already registered`);
             }
 
@@ -380,8 +380,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // get refresh token from cookie
             return (document.cookie.split(';').find(x => x.includes('fakeRefreshToken')) || '=').split('=')[1];
         }
+
+        function displaySnackbar(message: string, panelClass: string) {
+            // const duration = 3000;
+            // displaysnackBar('Close',{
+            //     duration: duration,
+            //     panelClass: [panelClass]
+            };
+        }
+
     }
-}
 
 export let fakeBackendProvider = {
     // use fake backend in place of Http service for backend-less development
