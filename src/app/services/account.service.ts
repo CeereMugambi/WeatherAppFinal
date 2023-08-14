@@ -51,7 +51,7 @@ export class AccountService {
     }
 
     register(account: IAccount) {
-        return this.http.post(`${baseUrl}/register`, account);
+        return this.http.post(`${baseUrl}/registration`, account);
     }
 
     verifyEmail(token: string) {
