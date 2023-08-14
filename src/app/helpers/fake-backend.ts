@@ -133,7 +133,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             account.dateCreated = new Date().toISOString();
             account.verificationToken = new Date().getTime().toString();
-            account.isVerified = true;
+            account.isVerified = false;
             account.refreshTokens = [];
             delete account.confirmPassword;
             accounts.push(account);
