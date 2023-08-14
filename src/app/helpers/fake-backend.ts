@@ -15,7 +15,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = request;
-        // const alertService = this.alertService;
+        const self = this; // Capture the context
+
 
         return handleRoute();
 
@@ -81,7 +82,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             const account = accounts.find(x => x.refreshTokens.includes(refreshToken));
             
-          if (!refreshToken) {
+            if (!refreshToken) {
                 displaySnackbar('Refresh token not found', 'error-snackbar');
                 return unauthorized();
             }
@@ -143,9 +144,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     <p>Thanks for registering!</p>
                     <p>Please click the below link to verify your email address:</p>
                     <p><a href="${verifyUrl}">${verifyUrl}</a></p>
-                    <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
+                    </div>
                 `, 'info-snackbar')
-            }, 1000);
+            }, 3000);
 
             return ok();
         }
@@ -382,14 +383,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function displaySnackbar(message: string, panelClass: string) {
-            // const duration = 3000;
-            // displaysnackBar('Close',{
-            //     duration: duration,
-            //     panelClass: [panelClass]
-            };
+            const duration = 3000;
+            self.snackBar.open(message, 'Close', {
+                duration: duration,
+                panelClass: [panelClass]
+            });
         }
-
+        
     }
+}
+    
+    
 
 export let fakeBackendProvider = {
     // use fake backend in place of Http service for backend-less development
