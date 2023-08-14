@@ -21,8 +21,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     ReactiveFormsModule,
     FormsModule,
     AccountRoutingModule,
-    ComponentsModule,
-  
+    ComponentsModule  
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
