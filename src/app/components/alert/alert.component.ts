@@ -3,12 +3,14 @@ import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+
 import { Alert,AlertType } from 'src/app/models';
 import { AlertService } from 'src/app/services';
 @Component({
     selector: 'app-alert',
     templateUrl: 'alert.component.html',
-    styleUrls: ['alert.component.sass']
+    styleUrls: ['alert.component.sass'],
 })
 export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';
