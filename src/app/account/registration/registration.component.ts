@@ -58,8 +58,11 @@ export class RegistrationComponent implements OnInit{
           .pipe(first())
           .subscribe({
               next: () => {
-                  this.alertService.success('Registration successful, please check your email for verification instructions', { keepAfterRouteChange: true });
+                  this.alertService.success('Registration successful',{ 
+                    keepAfterRouteChange: true,
+                });
                   this.router.navigate(['../login'], { relativeTo: this.route });
+                  
               },
               error: error => {
                   this.alertService.error(error);
