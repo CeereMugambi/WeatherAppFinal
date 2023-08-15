@@ -1,7 +1,0 @@
-<div *ngIf="alerts.length" class="container">
-    <div *ngFor="let alert of alerts" class="alert-container">
-        <mat-snack-bar class="snackbar" [ngClass]="getSnackBarCssClass(alert.type)">
-            {{ alert.message }}
-        </mat-snack-bar>
-    </div>
-</div>
