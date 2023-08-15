@@ -63,7 +63,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const account = accounts.find(x => x.email === email && x.password === password && x.isVerified);
             
             if (!account) {
-                displaySnackbar('Email or password is incorrect', 'snackbar-error');
+                displaySnackbar;
                 return error('Email or password is incorrect');
             }
 
@@ -118,7 +118,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         
             // Check if an account with the provided email already exists
             if (accounts.find(x => x.email === account.email)) {
-                displaySnackbar(`<h4Email Already Registered</h4>`,'snackbar-error');
+                displaySnackbar(`Email Already Registered`,'snackbar-error');
                 return ok();
             }
 
@@ -143,8 +143,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 const verifyUrl = `${location.origin}/account/verify-email?token=${encodeURIComponent(account.verificationToken)}`;
                 displaySnackbar(`
                     <p>Thanks for registering!</p>
-                `, 'snackbar-info',)
-            }, 2000);
+                    <p>Please click the below link to verify your email address:</p><br><br>
+                    <p><a href= "${verifyUrl}">${verifyUrl}</a></p>
+                    </div>
+                `, 'snackbar-info')
+            },1000);
 
             return ok();
         }
@@ -183,7 +186,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     <h4>Reset Password Email</h4>
                     <p>Please click the below link to reset your password:</p>
                     <p><a href="${resetUrl}">${resetUrl}</a></p>
-                `,  'snackbar-info');
+                `,  'info-snackbar');
             }, 1000);
 
             return ok();
@@ -243,7 +246,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             const account = body;
             if (accounts.find(x => x.email === account.email)) {
-                const errorMessage = `Email ${account.email} is already registered`;displaySnackbar(errorMessage, 'snackbar-error');
+                const errorMessage = `Email ${account.email} is already registered`;displaySnackbar(errorMessage, 'error-snackbar');
                 return error(`Email ${account.email} is already registered`);
             }
 
@@ -379,35 +382,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return (document.cookie.split(';').find(x => x.includes('fakeRefreshToken')) || '=').split('=')[1];
         }
 
-        function displaySnackbar(message: string, panelClass: string, allowHTML = false) {
+        function displaySnackbar(message: string, panelClass: string) {
             const duration = 3000;
-        
-            // Create the snackbar message element
-            const snackbarMessage = document.createElement('div');
-            snackbarMessage.className = 'snackbar-message';
-        
-            // Conditionally set the content based on allowHTML
-            if (allowHTML) {
-                snackbarMessage.innerHTML = message; // Set the HTML content
-            } else {
-                snackbarMessage.textContent = message; // Set plain text content
-            }
-        
-            // Open the snackbar using MatSnackBar
             self.snackBar.openFromComponent(AlertComponent, {
                 duration: duration,
                 panelClass: [panelClass],
-                data: {
-                    snackbarMessage: snackbarMessage.outerHTML // Pass the HTML content to the SnackbarComponent
-                }
             });
         }
         
         
     }
-}
-    
-    
+}  
 
 export let fakeBackendProvider = {
     // use fake backend in place of Http service for backend-less development
