@@ -1,10 +1,12 @@
 import { Component,OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AbstractControl} from '@angular/forms';
+
 import { AccountService } from 'src/app/services';
 import { AlertService } from 'src/app/services';
 import { MustMatch } from 'src/app/helpers';
-import { first } from 'rxjs/operators';
+import { first } from 'rxjs/operators';;
 
 
 @Component({
@@ -25,11 +27,20 @@ export class RegistrationComponent implements OnInit{
       private alertService: AlertService
   ) { }
 
+  noSpecialChars(control: AbstractControl) {
+    const pattern = /^[a-zA-Z0-9]*$/; // Regular expression to allow only alphanumeric characters
+    if (!pattern.test(control.value)) {
+      return { specialChars: true };
+    }
+    return null;
+  }
+  
+
   ngOnInit() {
       this.form = this.formBuilder.group({
           title: ['', Validators.required],
-          firstName: ['', Validators.required],
-          lastName: ['', Validators.required],
+          firstName: ['', [Validators.required, this.noSpecialChars]],
+          lastName: ['', [Validators.required, this.noSpecialChars]],
           email: ['', [Validators.required, Validators.email]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           confirmPassword: ['', Validators.required],
@@ -69,6 +80,11 @@ export class RegistrationComponent implements OnInit{
                   this.submitting = false;
               }
           });
+        
+          
   }
+
+
+  
 }
 
