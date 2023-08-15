@@ -5,6 +5,8 @@ import { delay, materialize, dematerialize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { IRole } from '../models';
+import { AlertComponent } from '../components/alert/alert.component';
+
 // array in local storage for accounts
 const accountsKey = 'angular-15-signup-verification-boilerplate-accounts';
 let accounts: any[] = JSON.parse(localStorage.getItem(accountsKey)!) || [];
@@ -61,7 +63,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const account = accounts.find(x => x.email === email && x.password === password && x.isVerified);
             
             if (!account) {
-                displaySnackbar('Email or password is incorrect', 'error-snackbar');
+                displaySnackbar('Email or password is incorrect', 'snackbar-error');
                 return error('Email or password is incorrect');
             }
 
@@ -83,7 +85,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const account = accounts.find(x => x.refreshTokens.includes(refreshToken));
             
             if (!refreshToken) {
-                displaySnackbar('Refresh token not found', 'error-snackbar');
+                displaySnackbar('Refresh token not found', 'snackbar-error');
                 return unauthorized();
             }
 
@@ -116,7 +118,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         
             // Check if an account with the provided email already exists
             if (accounts.find(x => x.email === account.email)) {
-                displaySnackbar('Email Already Registered', 'error-snackbar');
+                displaySnackbar(`<h4Email Already Registered</h4>`,'snackbar-error');
                 return ok();
             }
 
@@ -130,7 +132,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             account.dateCreated = new Date().toISOString();
             account.verificationToken = new Date().getTime().toString();
-            account.isVerified = false;
+            account.isVerified = true;
             account.refreshTokens = [];
             delete account.confirmPassword;
             accounts.push(account);
@@ -138,15 +140,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // display verification email in alert
             setTimeout(() => {
-                const verifyUrl = `${location.origin}/account/verify-email?token=${account.verificationToken}`;
+                const verifyUrl = `${location.origin}/account/verify-email?token=${encodeURIComponent(account.verificationToken)}`;
                 displaySnackbar(`
-                    <h4>Verification Email</h4>
                     <p>Thanks for registering!</p>
-                    <p>Please click the below link to verify your email address:</p>
-                    <p><a href="${verifyUrl}">${verifyUrl}</a></p>
-                    </div>
-                `, 'info-snackbar')
-            }, 3000);
+                `, 'snackbar-info',)
+            }, 2000);
 
             return ok();
         }
@@ -156,7 +154,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const account = accounts.find(x => !!x.verificationToken && x.verificationToken === token);
             
             if (!account) {
-                displaySnackbar('Verification failed', 'error-snackbar');
+                displaySnackbar('Verification failed', 'snackbar-error');
                 return error('Verification has failed');
             }
             // set is verified flag to true if token is valid
@@ -183,10 +181,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 const resetUrl = `${location.origin}/account/reset-password?token=${account.resetToken}`;
                 displaySnackbar(`
                     <h4>Reset Password Email</h4>
-                    <p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
+                    <p>Please click the below link to reset your password:</p>
                     <p><a href="${resetUrl}">${resetUrl}</a></p>
-                    <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
-                `,  'info-snackbar');
+                `,  'snackbar-info');
             }, 1000);
 
             return ok();
@@ -246,7 +243,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             const account = body;
             if (accounts.find(x => x.email === account.email)) {
-                const errorMessage = `Email ${account.email} is already registered`;displaySnackbar(errorMessage, 'error-snackbar');
+                const errorMessage = `Email ${account.email} is already registered`;displaySnackbar(errorMessage, 'snackbar-error');
                 return error(`Email ${account.email} is already registered`);
             }
 
@@ -382,13 +379,30 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return (document.cookie.split(';').find(x => x.includes('fakeRefreshToken')) || '=').split('=')[1];
         }
 
-        function displaySnackbar(message: string, panelClass: string) {
+        function displaySnackbar(message: string, panelClass: string, allowHTML = false) {
             const duration = 3000;
-            self.snackBar.open(message, 'Close', {
+        
+            // Create the snackbar message element
+            const snackbarMessage = document.createElement('div');
+            snackbarMessage.className = 'snackbar-message';
+        
+            // Conditionally set the content based on allowHTML
+            if (allowHTML) {
+                snackbarMessage.innerHTML = message; // Set the HTML content
+            } else {
+                snackbarMessage.textContent = message; // Set plain text content
+            }
+        
+            // Open the snackbar using MatSnackBar
+            self.snackBar.openFromComponent(AlertComponent, {
                 duration: duration,
-                panelClass: [panelClass]
+                panelClass: [panelClass],
+                data: {
+                    snackbarMessage: snackbarMessage.outerHTML // Pass the HTML content to the SnackbarComponent
+                }
             });
         }
+        
         
     }
 }
