@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
         .pipe(first())
         .subscribe(accounts => {
           this.accounts = accounts;
-          this.dataSource.data = this.accounts; // Assign data source here
+          this.dataSource.data = this.accounts;
         });
   }
 
@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
         .pipe(first())
         .subscribe(() => {
           this.accounts = this.accounts!.filter(x => x.id !== id);
-          this.dataSource.data = this.accounts; // Update data source after deletion
+          this.dataSource.data = this.accounts;
         });
     }
   }
