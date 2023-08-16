@@ -115,10 +115,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function register() {
             const account = body;
-        
-            // Check if an account with the provided email already exists
+
             if (accounts.find(x => x.email === account.email)) {
-                displaySnackbar(`Email Already Registered`,'snackbar-error');
+                // display email already registered "email" in alert
+                setTimeout(() => {
+                    displaySnackbar(`
+                        <h4>Email Already Registered</h4>
+                        <p>Your email ${account.email} is already registered.</p>
+                        <p>If you don't know your password please visit the <a href="${location.origin}/account/forgot-password">forgot password</a> page.</p>
+                        <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
+                    `, 'snackbar-warning');
+                }, 1000);
+
+                // always return ok() response to prevent email enumeration
                 return ok();
             }
 
@@ -132,7 +141,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             account.dateCreated = new Date().toISOString();
             account.verificationToken = new Date().getTime().toString();
-            account.isVerified = true;
+            account.isVerified = false;
             account.refreshTokens = [];
             delete account.confirmPassword;
             accounts.push(account);
@@ -140,14 +149,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // display verification email in alert
             setTimeout(() => {
-                const verifyUrl = `${location.origin}/account/verify-email?token=${encodeURIComponent(account.verificationToken)}`;
+                const verifyUrl = `${location.origin}/account/verify-email?token=${account.verificationToken}`;
                 displaySnackbar(`
+                    <h4>Verification Email</h4>
                     <p>Thanks for registering!</p>
-                    <p>Please click the below link to verify your email address:</p><br><br>
-                    <p><a href= "${verifyUrl}">${verifyUrl}</a></p>
-                    </div>
-                `, 'snackbar-info')
-            },1000);
+                    <p>Please click the below link to verify your email address:</p>
+                    <p><a href="${verifyUrl}">${verifyUrl}</a></p>
+                    <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
+                `, 'snackbar-info');
+            }, 1000);
 
             return ok();
         }
@@ -156,17 +166,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const { token } = body;
             const account = accounts.find(x => !!x.verificationToken && x.verificationToken === token);
             
-            if (!account) {
-                displaySnackbar('Verification failed', 'snackbar-error');
-                return error('Verification has failed');
-            }
+            if (!account) return error('Verification failed');
+            
             // set is verified flag to true if token is valid
             account.isVerified = true;
             localStorage.setItem(accountsKey, JSON.stringify(accounts));
 
             return ok();
         }
-
         function forgotPassword() {
             const { email } = body;
             const account = accounts.find(x => x.email === email);
