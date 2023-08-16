@@ -7,12 +7,13 @@ import { LoginComponent } from './login/login.component';
 import { ComponentsModule } from '../components/components.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
 @NgModule({
   declarations: [ 
-    LoginComponent, RegistrationComponent, VerifyEmailComponent,
+    LoginComponent, RegistrationComponent, VerifyEmailComponent, ForgotPasswordComponent,
     ],
 
   imports: [
