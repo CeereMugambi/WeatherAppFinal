@@ -1,12 +1,11 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,Input,OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AbstractControl} from '@angular/forms';
-
 import { AccountService } from 'src/app/services';
 import { AlertService } from 'src/app/services';
 import { MustMatch } from 'src/app/helpers';
-import { first } from 'rxjs/operators';;
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration-form',
@@ -14,7 +13,9 @@ import { first } from 'rxjs/operators';;
   styleUrls: ['./registration-form.component.sass']
 })
 export class RegistrationFormComponent implements OnInit {
-  
+
+@Input() isAdmin: boolean = false;
+
   form!: FormGroup;
   submitting = false;
   submitted = false;
@@ -27,8 +28,6 @@ export class RegistrationFormComponent implements OnInit {
   toggleConfirmPassword() {
     this.hideConfirmPassword = !this.hideConfirmPassword;
   }
-
-
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
