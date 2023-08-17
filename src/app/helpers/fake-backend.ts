@@ -153,9 +153,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 displaySnackbar(`
                     <h4>Verification Email</h4>
                     <p>Thanks for registering!</p>
-                    <p>Please click the below link to verify your email address:</p>
-                    <p><a href="${verifyUrl}">${verifyUrl}</a></p>
-                    <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
                 `, 'snackbar-info');
             }, 1000);
 
