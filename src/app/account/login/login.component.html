@@ -15,7 +15,11 @@
         
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <mat-icon matSuffix (click)="togglePassword()">
+            {{ hidePassword ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
           <mat-error *ngIf="submitted && f.password.errors">
             <div *ngIf="f.password.errors.required">Password is required</div>
           </mat-error>

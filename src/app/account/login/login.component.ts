@@ -13,6 +13,13 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   submitting = false;
   submitted = false;
+  hidePassword = true; 
+
+
+  togglePassword() {
+    this.hidePassword = !this.hidePassword;
+
+}
 
   constructor(
     private formBuilder: FormBuilder,
