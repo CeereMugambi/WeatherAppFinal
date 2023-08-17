@@ -5,6 +5,7 @@ import { homeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AccountModule } from '../account/account.module';
 import { ComponentsModule } from '../components/components.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { ComponentsModule } from '../components/components.module';
     MaterialModule,
     homeRoutingModule,
     AccountModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule,
 
   ],
   exports:[
