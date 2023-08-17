@@ -7,6 +7,8 @@ import { MaterialModule } from '../material/material.module';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { HomeNavbarComponent } from './home-navbar/home-navbar.component';
 import { AlertComponent } from './alert/alert.component';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,12 +19,15 @@ import { AlertComponent } from './alert/alert.component';
     CardComponent,
     SubnavbarComponent,
     HomeNavbarComponent,
-    AlertComponent
+    AlertComponent,
+    RegistrationFormComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    ComponentsRoutingModule
+    ComponentsRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
 
   ],
   
@@ -31,7 +36,8 @@ import { AlertComponent } from './alert/alert.component';
     CardComponent,
     SubnavbarComponent,
     HomeNavbarComponent,
-    AlertComponent
+    AlertComponent,
+    RegistrationFormComponent
   ]
   
     
