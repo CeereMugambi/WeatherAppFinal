@@ -18,6 +18,16 @@ export class RegistrationFormComponent implements OnInit {
   form!: FormGroup;
   submitting = false;
   submitted = false;
+  hidePassword = true; 
+  hideConfirmPassword=true;
+
+  togglePassword() {
+    this.hidePassword = !this.hidePassword;
+  }
+  toggleConfirmPassword() {
+    this.hideConfirmPassword = !this.hideConfirmPassword;
+  }
+
 
   constructor(
       private formBuilder: FormBuilder,
