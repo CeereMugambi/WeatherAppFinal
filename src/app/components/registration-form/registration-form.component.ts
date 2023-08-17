@@ -46,7 +46,7 @@ export class RegistrationFormComponent implements OnInit {
           confirmPassword: ['', Validators.required],
           acceptTerms: [false, Validators.requiredTrue]
       }, {
-          validator: MustMatch('password', 'confirmPassword')
+          validator: MustMatch('password','confirmPassword')
       });
   }
 
