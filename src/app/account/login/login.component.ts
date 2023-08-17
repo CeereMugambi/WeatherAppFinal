@@ -25,18 +25,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, this.noSpecialCharactersValidator]]
+      password: ['', [Validators.required]]
     });
   }
-
-  // Custom validator for no special characters in password
-  noSpecialCharactersValidator(control: any) { // Specify the type of 'control'
-    if (/[!@#$%^&*()_+[\]{};':"\\|,.<>?]/.test(control.value)) {
-      return { specialCharacters: true };
-    }
-    return null;
-  }
-
   // Convenience getter for easy access to form fields
   get f() {
     return this.form.controls;
