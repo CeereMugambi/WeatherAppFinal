@@ -1,5 +1,17 @@
-<div class="card-body">
+<div class="card">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div *ngIf="isAdmin" class="input-row">
+            <mat-form-field class="input-field">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                  <mat-option value=""></mat-option>
+                  <mat-option value="User">User</mat-option>
+                  <mat-option value="Admin">Admin</mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.role.errors">Role is required</mat-error>
+              </mat-form-field>
+            </div>
+
         <div class="input-row">
                 <mat-form-field class="input-field">
                     <mat-label>Title</mat-label>
@@ -43,7 +55,6 @@
                 <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
             </div>
             </div>
-            
             
             <div class="input-row">
                 <mat-form-field class="input-field">
