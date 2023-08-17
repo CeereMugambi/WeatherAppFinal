@@ -18,8 +18,6 @@
           <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
           <mat-error *ngIf="submitted && f.password.errors">
             <div *ngIf="f.password.errors.required">Password is required</div>
-            <div *ngIf="f.password.errors?.specialCharacters" class="warning-message">
-            Password cannot contain special characters</div>
           </mat-error>
         </mat-form-field>
         
