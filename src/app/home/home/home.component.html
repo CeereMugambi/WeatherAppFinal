@@ -1,25 +1,18 @@
-
+<app-home-navbar></app-home-navbar>
 <div class="search">
-    <form #form="ngForm" (submit)="onSubmit()">
-      <div class="search-container">
-        <div class="input-container">
-          <mat-form-field>
-            <input matInput type="text" placeholder="Search city" name="cityName" [(ngModel)]="cityName" (keydown.enter)="onSubmit()">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="date" id="dateInput" name="selectedDate" [(ngModel)]="selectedDate" (keydown.enter)="onSubmit()">
-          </mat-form-field>
-  
-          <button mat-icon-button class="submit-button" type="submit">
-            <mat-icon>search</mat-icon>
-          </button>
-        </div>
+  <form #form="ngForm" (submit)="onSubmit()">
+    <div class="search-container">
+      <div class="input-container">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Search city" name="cityName" [(ngModel)]="cityName" (keydown.enter)="onSubmit()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="date" id="dateInput" name="selectedDate" [(ngModel)]="selectedDate" (keydown.enter)="onSubmit()">
+        </mat-form-field>
+        <button mat-icon-button class="submit-button" type="submit">
+          <mat-icon>search</mat-icon>
+        </button>
       </div>
-    </form>
-  </div>
-
-    
-  
-    
-  
-  
+    </div>
+  </form>
+</div>
