@@ -10,14 +10,12 @@ import { Router } from '@angular/router';
 
 export class EditAdminComponent {
     title!: string;
-    id?: string;
 
     constructor(private router: Router) {}
     
     onChangeRoute() {
         // Change the route here
         this.router.navigate(['./list']); 
-        console.log(this.title)
     }
 
 
