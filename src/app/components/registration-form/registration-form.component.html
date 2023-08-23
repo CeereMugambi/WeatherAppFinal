@@ -83,12 +83,14 @@
             <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
           </div>
           </div>
-
+        
+        <div *ngIf="!isAdmin" class="input-row">
         <mat-checkbox formControlName="acceptTerms" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }">
           Accept Terms & Conditions
         </mat-checkbox>
         <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
-        
+        </div>
+
         <div class="button-container">
         <button mat-raised-button [disabled]="submitting" color="primary">
           <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
