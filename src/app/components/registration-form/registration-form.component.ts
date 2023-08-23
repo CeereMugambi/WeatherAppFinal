@@ -116,7 +116,7 @@ export class RegistrationFormComponent implements OnInit {
           this.accountService.delete(this.account.id!)
               .pipe(first())
               .subscribe(() => {
-                  this.alertService.success('Account deleted successfully', { keepAfterRouteChange: true });
+                  this.alertService.success('Account deleted!', { keepAfterRouteChange: true });
               });
       }
 }
