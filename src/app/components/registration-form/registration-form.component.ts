@@ -17,6 +17,8 @@ export class RegistrationFormComponent implements OnInit {
 @Input() isAdmin: boolean = false;
 @Input() isUpdate: boolean = false;
 @Output() changeRouteEvent = new EventEmitter<void>();
+@Output() updateSuccess = new EventEmitter<void>();
+
 
 
   account = this.accountService.accountValue!;
@@ -58,7 +60,9 @@ export class RegistrationFormComponent implements OnInit {
           email: ['', [Validators.required, Validators.email]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           confirmPassword: ['', Validators.required],
-          acceptTerms: [false, Validators.requiredTrue]
+          acceptTerms: [false, Validators.requiredTrue],
+          role: ['', Validators.required],
+
       }, {
           validator: MustMatch('password','confirmPassword')
       });
@@ -102,6 +106,9 @@ export class RegistrationFormComponent implements OnInit {
                   this.router.navigate(['../login'], { relativeTo: this.route });
 
                   this.changeRouteEvent.emit();   
+
+                  this.updateSuccess.emit();
+
               },
               error: error => {
                   this.alertService.error(error);
