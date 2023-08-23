@@ -1,4 +1,4 @@
-import { Component,Input,OnInit } from '@angular/core';
+import { Component,Input,OnInit,EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AbstractControl} from '@angular/forms';
@@ -15,6 +15,9 @@ import { first } from 'rxjs/operators';
 export class RegistrationFormComponent implements OnInit {
 
 @Input() isAdmin: boolean = false;
+@Output() changeRouteEvent = new EventEmitter<void>();
+
+
 
   form!: FormGroup;
   submitting = false;
@@ -82,13 +85,16 @@ export class RegistrationFormComponent implements OnInit {
                     keepAfterRouteChange: true,
                 });
                   this.router.navigate(['../login'], { relativeTo: this.route });
-                  
+
+                  this.changeRouteEvent.emit();   
               },
               error: error => {
                   this.alertService.error(error);
                   this.submitting = false;
               }
           });
+
+         
         
           
   }
