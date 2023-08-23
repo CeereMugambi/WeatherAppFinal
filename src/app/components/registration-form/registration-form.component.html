@@ -92,7 +92,7 @@
         </div>
 
         <div class="button-container">
-        <button mat-raised-button [disabled]="submitting" color="primary">
+        <button mat-raised-button [disabled]="submitting" color="primary" (click)="onSubmit()">
           <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
           {{ isUpdate ? 'Update' : 'Create Account' }}       
          </button>
@@ -105,7 +105,7 @@
       </button>
       </div>
 
-      <a [routerLink]="isAdmin ? '/list' : '../login'" class="cancel-link">Cancel
+      <a [routerLink]="isAdmin ? '/list' : isUpdate ? '/details' :'../login'" class="cancel-link">Cancel
         </a>
       </form>
   </div>
