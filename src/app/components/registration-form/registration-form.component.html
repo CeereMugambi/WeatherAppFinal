@@ -97,6 +97,7 @@
           Create Account
         </button>
       </div>
-        <a routerLink="../login" href="" class="cancel-link">Cancel</a>
-    </form>
+      <a [routerLink]="isAdmin ? '/list' : '../login'" class="cancel-link">cancel
+        </a>
+      </form>
   </div>
