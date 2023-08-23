@@ -1,25 +1,30 @@
 <app-background></app-background>
-<app-home-navbar></app-home-navbar>
+<app-subnavbar></app-subnavbar>
 <h2>Accounts</h2>
 <p><b>All accounts from secure (admin only) API endpoint:</b></p>
-<a routerLink="/add" mat-raised-button color="primary" class="mb-2">Create Account</a>
-<mat-table class="mat-elevation-z8" [dataSource]="dataSource">
+<a routerLink="/add" mat-raised-button color="primary">Create Account</a>
+
+<mat-table class="mat-elevation-z9" [dataSource]="dataSource">
+  <!-- Column definitions -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef style="width: 30%">Name</th>
-    <td mat-cell *matCellDef="let account" class="align-middle">{{account.title}} {{account.firstName}} {{account.lastName}}</td>
+    <td mat-cell *matCellDef="let account" class="align-middle">{{ account.title }} {{ account.firstName }} {{ account.lastName }}</td>
   </ng-container>
+  
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef style="width: 30%">Email</th>
-    <td mat-cell *matCellDef="let account" class="align-middle">{{account.email}}</td>
+    <td mat-cell *matCellDef="let account" class="align-middle">{{ account.email }}</td>
   </ng-container>
+  
   <ng-container matColumnDef="role">
     <th mat-header-cell *matHeaderCellDef style="width: 30%">Role</th>
-    <td mat-cell *matCellDef="let account" class="align-middle">{{account.role}}</td>
+    <td mat-cell *matCellDef="let account" class="align-middle">{{ account.role }}</td>
   </ng-container>
+  
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef style="width: 10%"></th>
     <td mat-cell *matCellDef="let account" class="align-middle">
-      <a routerLink="edit/{{account.id}}" mat-button color="primary" class="me-1">Edit</a>
+      <a routerLink="edit/{{ account.id }}" mat-button color="primary" class="me-1">Edit</a>
       <button mat-button color="warn" (click)="deleteAccount(account.id)" [disabled]="account.isDeleting">
         <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
         <span *ngIf="!account.isDeleting">Delete</span>
@@ -27,24 +32,16 @@
     </td>
   </ng-container>
 
+  <!-- Header row definition -->
   <tr mat-header-row *matHeaderRowDef="['name', 'email', 'role', 'actions']"></tr>
-  <tr mat-row *matRowDefOf="let account of accounts" [ngClass]="{ 'loading-row': !account }">
-    <ng-container *ngIf="account; else loadingRow">
-      <td mat-cell class="align-middle">{{account.title}} {{account.firstName}} {{account.lastName}}</td>
-      <td mat-cell class="align-middle">{{account.email}}</td>
-      <td mat-cell class="align-middle">{{account.role}}</td>
-      <td mat-cell class="align-middle">
-        <a routerLink="edit-admin/{{account.id}}" mat-button color="primary" class="me-1">Edit</a>
-        <button mat-button color="warn" (click)="deleteAccount(account.id)" [disabled]="account.isDeleting">
-          <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
-          <span *ngIf="!account.isDeleting">Delete</span>
-        </button>
-      </td>
-    </ng-container>
-    <ng-template #loadingRow>
-      <td mat-cell [attr.colspan]="4" class="text-center">
-        <span class="spinner-border spinner-border-lg align-center"></span>
-      </td>
-    </ng-template>
+  
+  <!-- Row definition -->
+  <tr mat-row *matRowDef="let account; columns: ['name', 'email', 'role', 'actions']" [ngClass]="{ 'loading-row': !account }">
+    <!-- Cells content -->
   </tr>
 </mat-table>
+
+
+
+
+
