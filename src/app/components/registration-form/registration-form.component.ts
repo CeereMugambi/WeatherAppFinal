@@ -15,15 +15,18 @@ import { first } from 'rxjs/operators';
 export class RegistrationFormComponent implements OnInit {
 
 @Input() isAdmin: boolean = false;
+@Input() isUpdate: boolean = false;
 @Output() changeRouteEvent = new EventEmitter<void>();
 
 
-
+  account = this.accountService.accountValue!;
   form!: FormGroup;
   submitting = false;
   submitted = false;
   hidePassword = true; 
   hideConfirmPassword=true;
+  deleting = false;
+
 
   togglePassword() {
     this.hidePassword = !this.hidePassword;
@@ -47,7 +50,6 @@ export class RegistrationFormComponent implements OnInit {
     return null;
   }
   
-
   ngOnInit() {
       this.form = this.formBuilder.group({
           title: ['', Validators.required],
@@ -60,6 +62,18 @@ export class RegistrationFormComponent implements OnInit {
       }, {
           validator: MustMatch('password','confirmPassword')
       });
+
+      //used for the edit and profile update logic
+      if (this.isUpdate) {
+        this.form.patchValue({
+          title: this.account.title,
+          firstName: this.account.firstName,
+          lastName: this.account.lastName,
+          email: this.account.email,
+          password: [''],
+          confirmPassword: ['']
+        });
+      }
   }
 
   // convenience getter for easy access to form fields
@@ -77,6 +91,7 @@ export class RegistrationFormComponent implements OnInit {
       }
 
       this.submitting = true;
+      this.accountService.update(this.account.id!, this.form.value)
       this.accountService.register(this.form.value)
           .pipe(first())
           .subscribe({
@@ -92,12 +107,19 @@ export class RegistrationFormComponent implements OnInit {
                   this.alertService.error(error);
                   this.submitting = false;
               }
-          });
-
-         
-        
-          
+          });     
   }
+
+    onDelete() {
+      if (confirm('Are you sure?')) {
+          this.deleting = true;
+          this.accountService.delete(this.account.id!)
+              .pipe(first())
+              .subscribe(() => {
+                  this.alertService.success('Account deleted successfully', { keepAfterRouteChange: true });
+              });
+      }
+}
 
 
   
