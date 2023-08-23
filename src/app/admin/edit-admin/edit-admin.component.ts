@@ -14,8 +14,7 @@ export class EditAdminComponent {
     constructor(private router: Router) {}
     
     onChangeRoute() {
-        // Change the route here
-        this.router.navigate(['./list']); 
+        this.router.navigate(['../list']); 
     }
 
 
