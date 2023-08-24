@@ -92,18 +92,19 @@
         </div>
 
         <div class="button-container">
-        <button mat-raised-button [disabled]="submitting" color="primary" (click)="onSubmit()">
-          <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
-          {{ isUpdate ? 'Update' : 'Create Account' }}       
-         </button>
-      </div>
+          <button mat-raised-button [disabled]="submitting" color="primary" (click)="onSubmit()">
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+            {{ isUpdate ? 'Update' : 'Create Account' }}
+          </button>
+        </div>
+        
       
-      <div *ngIf="isUpdate" class="button-container">
+      <!-- <div *ngIf="isUpdate" class="button-container">
       <button mat-raised-button type="button" (click)="onDelete()" [disabled]="deleting" class="mat-warn">
         <span *ngIf="deleting" class="mat-progress-spinner"></span>
         Delete Account
       </button>
-      </div>
+      </div> -->
 
       <a [routerLink]="isAdmin ? '/list' : isUpdate ? '/details' :'../login'" class="cancel-link">Cancel
         </a>
