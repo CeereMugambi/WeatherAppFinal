@@ -10,6 +10,6 @@ export class UpdateComponent {
     constructor(private router: Router) { }
 
     handleUpdateSuccess() {
-        this.router.navigate(['../details']);
+        this.router.navigate(['/details']);
     }
 }
