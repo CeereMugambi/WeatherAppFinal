@@ -84,7 +84,7 @@
           </div>
           </div>
         
-        <div class="input-row">
+        <div *ngIf="!isAdmin && !isUpdate" class="input-row">
         <mat-checkbox formControlName="acceptTerms" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }">
           Accept Terms & Conditions
         </mat-checkbox>
@@ -92,12 +92,11 @@
         </div>
 
         <div class="button-container">
-          <button mat-raised-button [disabled]="submitting" color="primary">
-            <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
-            {{ isUpdate ? 'Update' : 'Create Account' }}
-          </button>
-        </div>
-        
+        <button mat-raised-button [disabled]="submitting" color="primary" (click)="onSubmit()">
+          <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+          {{ isUpdate ? 'Update' : 'Create Account' }}       
+         </button>
+      </div>
       
       <div *ngIf="isUpdate" class="button-container">
       <button mat-raised-button type="button" (click)="onDelete()" [disabled]="deleting" class="mat-warn">
