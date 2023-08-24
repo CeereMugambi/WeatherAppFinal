@@ -61,6 +61,8 @@ export class RegistrationFormComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       acceptTerms: [false, Validators.requiredTrue],
+      // acceptTerms: [(this.isAdmin && this.isUpdate) ? true : false, Validators.requiredTrue],
+
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
@@ -72,21 +74,26 @@ export class RegistrationFormComponent implements OnInit {
         firstName: this.account.firstName,
         lastName: this.account.lastName,
         email: this.account.email,
+
       });
     }
   
     if (this.isAdmin && !this.isUpdate) {
       this.form.addControl('role', new FormControl('', Validators.required));
     }
+
   }
+
   
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
   onSubmit() {
-      this.submitted = true;
-
+    console.log(this.form.value)
+    console.log('isAdmin:', this.isAdmin);
+    console.log('isUpdate:', this.isUpdate);
+   
       // reset alerts on submit
       this.alertService.clear();
 
@@ -96,7 +103,12 @@ export class RegistrationFormComponent implements OnInit {
       }
 
       this.submitting = true;
+      if(this.isUpdate){
       this.accountService.update(this.account.id!, this.form.value)
+      this.submitted=true;
+      this.updateSuccess.emit();
+    }
+      else{
       this.accountService.register(this.form.value)
           .pipe(first())
           .subscribe({
@@ -104,18 +116,19 @@ export class RegistrationFormComponent implements OnInit {
                   this.alertService.success('Registration successful',{ 
                     keepAfterRouteChange: true,
                 });
+                this.submitted = true;
                   this.router.navigate(['../login'], { relativeTo: this.route });
                   
                   this.changeRouteEvent.emit();   
-
-                  // this.updateSuccess.emit();
+              
 
               },
               error: error => {
                   this.alertService.error(error);
                   this.submitting = false;
               }
-          });     
+          });   
+        }  
   }
 
     onDelete() {
