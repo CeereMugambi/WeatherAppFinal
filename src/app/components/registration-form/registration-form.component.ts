@@ -1,6 +1,6 @@
-import { Component,Input,OnInit,EventEmitter, Output } from '@angular/core';
+import { Component,Input,OnInit,EventEmitter, Output, } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup,FormControl, Validators} from '@angular/forms';
 import { AbstractControl} from '@angular/forms';
 import { AccountService } from 'src/app/services';
 import { AlertService } from 'src/app/services';
@@ -21,7 +21,7 @@ export class RegistrationFormComponent implements OnInit {
 
 
 
-  account = this.accountService.accountValue!;
+  // account = this.accountService.accountValue!;
   form!: FormGroup;
   submitting = false;
   submitted = false;
@@ -53,32 +53,33 @@ export class RegistrationFormComponent implements OnInit {
   }
   
   ngOnInit() {
-      this.form = this.formBuilder.group({
-          title: ['', Validators.required],
-          firstName: ['', [Validators.required, this.noSpecialChars]],
-          lastName: ['', [Validators.required, this.noSpecialChars]],
-          email: ['', [Validators.required, Validators.email]],
-          password: ['', [Validators.required, Validators.minLength(6)]],
-          confirmPassword: ['', Validators.required],
-          acceptTerms: [false, Validators.requiredTrue],
-          role: ['', Validators.required],
-
-      }, {
-          validator: MustMatch('password','confirmPassword')
-      });
-
-      //used for the edit and profile update logic
-      if (this.isUpdate) {
-        this.form.patchValue({
-          title: this.account.title,
-          firstName: this.account.firstName,
-          lastName: this.account.lastName,
-          email: this.account.email,
-          password: [''],
-          confirmPassword: ['']
-        });
-      }
+    this.form = this.formBuilder.group({
+      title: ['', Validators.required],
+      firstName: ['', [Validators.required, this.noSpecialChars]],
+      lastName: ['', [Validators.required, this.noSpecialChars]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+      acceptTerms: [false, Validators.requiredTrue],
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
+    });
+  
+    // Used for the edit and profile update logic
+    // if (this.isUpdate) {
+    //   this.form.patchValue({
+    //     title: this.account.title,
+    //     firstName: this.account.firstName,
+    //     lastName: this.account.lastName,
+    //     email: this.account.email,
+    //   });
+    // }
+  
+    if (this.isAdmin && !this.isUpdate) {
+      this.form.addControl('role', new FormControl('', Validators.required));
+    }
   }
+  
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
@@ -95,7 +96,7 @@ export class RegistrationFormComponent implements OnInit {
       }
 
       this.submitting = true;
-      this.accountService.update(this.account.id!, this.form.value)
+      // this.accountService.update(this.account.id!, this.form.value)
       this.accountService.register(this.form.value)
           .pipe(first())
           .subscribe({
@@ -104,10 +105,10 @@ export class RegistrationFormComponent implements OnInit {
                     keepAfterRouteChange: true,
                 });
                   this.router.navigate(['../login'], { relativeTo: this.route });
-
+                  
                   this.changeRouteEvent.emit();   
 
-                  this.updateSuccess.emit();
+                  // this.updateSuccess.emit();
 
               },
               error: error => {
@@ -117,16 +118,16 @@ export class RegistrationFormComponent implements OnInit {
           });     
   }
 
-    onDelete() {
-      if (confirm('Are you sure?')) {
-          this.deleting = true;
-          this.accountService.delete(this.account.id!)
-              .pipe(first())
-              .subscribe(() => {
-                  this.alertService.success('Account deleted successfully', { keepAfterRouteChange: true });
-              });
-      }
-}
+    // onDelete() {
+    //   if (confirm('Are you sure?')) {
+    //       this.deleting = true;
+    //       this.accountService.delete(this.account.id!)
+    //           .pipe(first())
+    //           .subscribe(() => {
+    //               this.alertService.success('Account deleted successfully', { keepAfterRouteChange: true });
+    //           });
+//     //   }
+// }
 
 
   
