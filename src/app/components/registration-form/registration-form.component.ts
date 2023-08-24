@@ -21,7 +21,7 @@ export class RegistrationFormComponent implements OnInit {
 
 
 
-  // account = this.accountService.accountValue!;
+  account = this.accountService.accountValue!;
   form!: FormGroup;
   submitting = false;
   submitted = false;
@@ -65,15 +65,15 @@ export class RegistrationFormComponent implements OnInit {
       validator: MustMatch('password', 'confirmPassword')
     });
   
-    // Used for the edit and profile update logic
-    // if (this.isUpdate) {
-    //   this.form.patchValue({
-    //     title: this.account.title,
-    //     firstName: this.account.firstName,
-    //     lastName: this.account.lastName,
-    //     email: this.account.email,
-    //   });
-    // }
+    //Used for the edit and profile update logic
+    if (this.isUpdate) {
+      this.form.patchValue({
+        title: this.account.title,
+        firstName: this.account.firstName,
+        lastName: this.account.lastName,
+        email: this.account.email,
+      });
+    }
   
     if (this.isAdmin && !this.isUpdate) {
       this.form.addControl('role', new FormControl('', Validators.required));
@@ -96,7 +96,7 @@ export class RegistrationFormComponent implements OnInit {
       }
 
       this.submitting = true;
-      // this.accountService.update(this.account.id!, this.form.value)
+      this.accountService.update(this.account.id!, this.form.value)
       this.accountService.register(this.form.value)
           .pipe(first())
           .subscribe({
@@ -118,16 +118,16 @@ export class RegistrationFormComponent implements OnInit {
           });     
   }
 
-    // onDelete() {
-    //   if (confirm('Are you sure?')) {
-    //       this.deleting = true;
-    //       this.accountService.delete(this.account.id!)
-    //           .pipe(first())
-    //           .subscribe(() => {
-    //               this.alertService.success('Account deleted successfully', { keepAfterRouteChange: true });
-    //           });
-//     //   }
-// }
+    onDelete() {
+      if (confirm('Are you sure?')) {
+          this.deleting = true;
+          this.accountService.delete(this.account.id!)
+              .pipe(first())
+              .subscribe(() => {
+                  this.alertService.success('Account deleted successfully', { keepAfterRouteChange: true });
+              });
+}
+    }
 
 
   
