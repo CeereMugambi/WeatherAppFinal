@@ -60,8 +60,7 @@ export class RegistrationFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      acceptTerms: [false, Validators.requiredTrue],
-      // acceptTerms: [(this.isAdmin && this.isUpdate) ? true : false, Validators.requiredTrue],
+      acceptTerms: [this.isAdmin, Validators.requiredTrue] //set to true for isAdmin
 
     }, {
       validator: MustMatch('password', 'confirmPassword')
