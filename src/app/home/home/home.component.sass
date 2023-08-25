@@ -1,29 +1,26 @@
-
-/* Add appropriate styling to the search input container */
-.search 
-  margin-top: 60px
+.top-section
   display: flex
+  align-items: center
   justify-content: center
-  align-items: center
-  
-/* Style the input container to align inputs horizontally */
-.input-container 
+  padding: 50px
+  margin-bottom: 20px
+
+.top-section input.mat-input,
+.top-section input[type="date"].mat-input
+  flex: 1
+  padding: 8px
+  border: 1px solid #ccc
+  border-radius: 20px
+  font-size: 14px
+  gap:10px
+
+.input-row
   display: flex
-  align-items: center
   gap: 20px
-  width:500px
 
-/* Add spacing between input fields and the submit button */
-.mat-form-field 
-  margin-right: 10px
-  width: 150px
-  height:50px
-  border-radius: 15px
-  
-
-
-
-
-
-
-
+.top-section button.mat-raised-button
+  border: none
+  border-radius: 20px
+  font-size: 14px
+  display: flex
+  margin-top: -30px

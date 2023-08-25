@@ -10,7 +10,7 @@ import { IweatherData, iForecastday } from 'src/app/models';
 @Component({ 
   selector:'home',
   templateUrl: 'home.component.html',
-  styleUrls: [ './home.component.sass'],
+  styleUrls: [ 'home.component.sass'],
   encapsulation: ViewEncapsulation.None 
 })
 
