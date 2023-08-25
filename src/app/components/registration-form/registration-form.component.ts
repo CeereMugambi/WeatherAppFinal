@@ -89,6 +89,8 @@ export class RegistrationFormComponent implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
+    this.submitted = true;
+
     console.log(this.form.value)
     console.log('isAdmin:', this.isAdmin);
     console.log('isUpdate:', this.isUpdate);
@@ -115,7 +117,6 @@ export class RegistrationFormComponent implements OnInit {
                   this.alertService.success('Registration successful',{ 
                     keepAfterRouteChange: true,
                 });
-                this.submitted = true;
                   this.router.navigate(['../login'], { relativeTo: this.route });
                   
                   this.changeRouteEvent.emit();   
