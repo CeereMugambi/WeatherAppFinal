@@ -1,9 +1,25 @@
+/* Global Styles */
+:root
+  --blue-1: #3C429E
+  --blue-2: #4C52AD
+  --yellow-1: #FAC742
+  --white: #FFF
+  --grey-1: #EDEDED
+  --shadow-dark: rgba(0, 0, 0, 0.3)
+  --shadow-light: rgba(255, 255, 255, 0.1)
+  --teal: #008080
+  --grey: #CCCCCC
+  --turquoise: #4fe7d7
+  --black: #1c1c1e
+
+/* Top Section */
 .top-section
   display: flex
   align-items: center
   justify-content: center
   padding: 50px
   margin-bottom: 20px
+  
 
 .top-section input.mat-input,
 .top-section input[type="date"].mat-input
@@ -12,7 +28,7 @@
   border: 1px solid #ccc
   border-radius: 20px
   font-size: 14px
-  gap:10px
+  gap: 10px
 
 .input-row
   display: flex
@@ -25,63 +41,53 @@
   display: flex
   margin-top: -30px
 
-:root 
-  --blue-1: #3C429E
-  --blue-2: #4C52AD
-  --yellow-1: #FAC742
-  --white: #FFF
-  --grey-1: #EDEDED
-  --shadow-dark: rgba(0, 0, 0, 0.3)
-  --shadow-light: rgba(255, 255, 255, 0.1)
-  --teal: #008080
-  --grey: #CCCCCC
-  --turquoise: #4fe7d7
-  --black:#1c1c1e
-
-.home-container 
-  width: 600px
-  height: 70vh
-  border-radius: 20px
+.home-container
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+  font-size: 16px
+  width: 1000px
+  height: 120vh
+  border-radius: 10px
   box-shadow: 10px 10px 10px var(--shadow-dark)
-  margin: 0 auto
+  margin: -50px auto 0 auto 
   display: flex
   flex-direction: column
   justify-content: center
   align-items: center
-
-  .upper-data 
-  position: relative
   overflow: hidden
+  
+
+/* Upper and Lower Data Sections */
+.upper-data,
+.lower-data
+  position: relative
   width: 100%
   height: 50%
-  border-top-left-radius: 20px
-  border-top-right-radius: 20px
+  border-radius: 20px
   display: flex
   justify-content: center
   align-items: center
 
-.lower-data 
-  position: relative
-  background-color: white
+.upper-data
   overflow: hidden
-  width: 100%
-  height: 50%
-  border-bottom-left-radius: 20px
-  border-bottom-right-radius: 20px
-  padding: 1em
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
+  border-bottom: none
 
-.upper-data img 
+.upper-data img
   position: absolute
   top: 0
   left: 0
   width: 100%
   height: 100%
 
-.weather-data 
+.lower-data
+  background-color: white
+  overflow: hidden
+  padding: 1em
+  display: flex
+  flex-direction: column
+  align-items: center
+
+/* Weather Data Section */
+.weather-data
   position: relative
   z-index: 1
   width: 100%
@@ -92,21 +98,25 @@
   align-items: center
   justify-content: center
 
-.location 
-  color: var(--black)
+.location
+  color: var(--white)
   text-align: center
   font-size: 1.2em
+  margin-top: 30px
 
-.temperature 
+.temperature
   color: var(--white)
   font-size: 4em
   text-align: center
   font-weight: 900
 
-.more-info-label 
+/* More Info Section */
+.more-info-label
   color: var(--black)
+  text-align: center
+  font-weight: bold
 
-.more-info-container 
+.more-info-container
   flex: 1
   background-color: white
   border-bottom-left-radius: 20px
@@ -117,31 +127,44 @@
   flex-wrap: wrap
   justify-content: space-evenly
 
-.info-block 
+.info-block
   width: 50%
   display: flex
   flex-direction: row
   justify-content: flex-start
   align-items: center
 
-.info-block-label 
+.info-block-label
   width: 50%
   display: flex
   flex-direction: column
   justify-content: center
   align-items: center
 
-.info-block-label img 
+.info-block-label img
   width: 1.5em
 
-.info-block-label span 
+.info-block-label span
   color: var(--black)
   font-size: 0.8em
 
-.info-block-value 
+.info-block-value
   width: 50%
   display: flex
   justify-content: flex-start
   align-items: center
-  color: var(--black)
+  color: var(--black),
+
+
+.feels-like-icon 
+  width: 24px
+  height: 24px
+  margin-right: 8px
+
+
+.icon-and-feels-like 
+  display: flex
+  align-items: center
+  margin-bottom: 8px
+
 
