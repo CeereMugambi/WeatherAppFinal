@@ -1,4 +1,5 @@
 <app-home-navbar></app-home-navbar>
+<div class="page-content">
 <div class="top-section">
     <form #form="ngForm" (submit)="onSubmit()">
       <div class = input-row>
@@ -13,21 +14,20 @@
         <button mat-raised-button type="submit" color="primary">submit
         </button>
       </div>
-
   </form>
+  </div>
 
-  <div class="home-page">
-    <div class="home-container">
-      <div *ngIf="IweatherData">
+  <div class="home-container-wrapper">
+      <div class="home-container"*ngIf="IweatherData">
          <!-- Weather data section -->
          <div class="upper-data" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
           <img src="../assets/hot.jpg"*ngIf="forecastDay.day.maxtemp_c > 15">
           <img src="../assets/cold.jpg"*ngIf="forecastDay.day.mintemp_c < 15">
     
         <div class="weather-data">
-            <div class="location">{{ IweatherData.location.name}}</div>
             <div class="temperature">{{ forecastDay.day.maxtemp_c }}°C</div>
-            <div class="location">{{ IweatherData.location.country}}</div>
+            <div class="location">{{ IweatherData.location.name}},{{ IweatherData.location.country}}</div>
+            <!-- <div class="location">{{ IweatherData.location.country}}</div> -->
 
 
         </div>
@@ -41,14 +41,25 @@
             <!-- Additional weather information -->
             <div class="info-block">
                 <div class="info-block-label">
-                    <img src="../assets/min.png">
-                    <span>FeelsLike</span>
+                  <div class="icon-and-feels-like">
+                    <img src="../assets/min.png" alt="Feels Like Icon" class="feels-like-icon">
+                    <span>Feels Like</span>
+                  </div>
+                  <div class="unit-selection">
+                    <p>Units:</p>
+                    <mat-button-toggle-group [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()">
+                      <mat-button-toggle value="metric">Celsius</mat-button-toggle>
+                      <mat-button-toggle value="imperial">Fahrenheit</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
                 </div>
                 <div class="info-block-value">
-                    {{forecastDay.day.mintemp_c }}°C
+                    {{ selectedUnits === 'metric' ? forecastDay.day.mintemp_c : forecastDay.day.mintemp_f }}
+                    {{ selectedUnits === 'metric' ? '°C' : '°F' }}
                 </div>
-            </div>
-    
+              </div>
+              
+              
             <div class="info-block">
                 <div class="info-block-label">
                     <img src="../assets/max.png">
@@ -81,6 +92,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 
