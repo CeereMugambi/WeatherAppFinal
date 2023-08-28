@@ -54,13 +54,13 @@ export class HomeComponent {
     
 
     private getWeatherData(cityName: string, units: string, date?: string) {
-      const request = date ? this.weatherService.getWeatherData(date, cityName) : this.weatherService.getWeatherData(cityName, units);
-      this.weatherSubscription = request.pipe( 
-        tap(response => {
+      const request = date ? this.weatherService.getWeatherData(date, cityName) : this.weatherService.getWeatherData(cityName, units); //construct API request
+      this.weatherSubscription = request.pipe( //assigns the subscription property
+        tap(response => { //allow UI update without altering the data itself
           this.IweatherData = response;
           console.log(response);
         })
-      ).subscribe();
+      ).subscribe(); //initiate the API call and start receiving data
     }
     
     onDateChange(date?:string) {
