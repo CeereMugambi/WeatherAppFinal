@@ -54,8 +54,8 @@ export class HomeComponent {
     
 
     private getWeatherData(cityName: string, units: string, date?: string) {
-      const request = date ? this.weatherService.getWeatherData(date, units) : this.weatherService.getWeatherData(cityName, units);
-      this.weatherSubscription = request.pipe(
+      const request = date ? this.weatherService.getWeatherData(date, cityName) : this.weatherService.getWeatherData(cityName, units);
+      this.weatherSubscription = request.pipe( 
         tap(response => {
           this.IweatherData = response;
           console.log(response);
@@ -70,11 +70,11 @@ export class HomeComponent {
     }
 
     onUnitsChange() {
-      if (this.weatherSubscription) {
-        this.weatherSubscription.unsubscribe();
+      if (this.weatherSubscription) { //checks if there is a current API call
+        this.weatherSubscription.unsubscribe(); //if true unsubscribe 
       }
-      if (this.cityName && this.selectedUnits) {
-        this.getWeatherData(this.cityName, this.selectedUnits);
+      if (this.cityName && this.selectedUnits) {  //check if both of these are available
+        this.getWeatherData(this.cityName, this.selectedUnits); //fetch weather data with new units //triggers new API call
       }
     }
     
