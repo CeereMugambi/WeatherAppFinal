@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
+
+import { Subscription } from 'rxjs';
+
+import { tap, map } from 'rxjs/operators';
 
 import { ViewEncapsulation } from '@angular/core';
 
@@ -17,6 +21,8 @@ import { IweatherData, iForecastday } from 'src/app/models';
 export class HomeComponent {
 
   constructor(private http: HttpClient, private weatherService: WeatherService) {}
+
+  @Input() isSelected: boolean = false;
    
   cityName:string = 'Nairobi';
   
@@ -26,38 +32,55 @@ export class HomeComponent {
 
   forecastData?: iForecastday[];
 
+  selectedUnits: string = 'metric';
+
+  weatherSubscription: Subscription | undefined;
+
 
 
   ngOnInit(): void {
-    this.getWeatherData(this.cityName);
+    this.getWeatherData(this.cityName,this.selectedUnits);
     this.cityName = '';
 
   }
   
     onSubmit() {
-      if (this.cityName && this.selectedDate) {
-        this.getWeatherData(this.cityName);
+      if (this.cityName && this.selectedDate &&this.selectedUnits) {
+        this.getWeatherData(this.cityName,this.selectedUnits);
         this.cityName = '';
         this.selectedDate = '';
+        this.selectedUnits
       } 
     }
     
 
-    private getWeatherData(cityName: string, date?: string) {
-      const request = date ? this.weatherService.getWeatherData(date) : this.weatherService.getWeatherData(cityName);
-      request.subscribe({
-        next:(response) => {
+    private getWeatherData(cityName: string, units: string, date?: string) {
+      const request = date ? this.weatherService.getWeatherData(date, units) : this.weatherService.getWeatherData(cityName, units);
+      this.weatherSubscription = request.pipe(
+        tap(response => {
           this.IweatherData = response;
           console.log(response);
-        }
-      });
+        })
+      ).subscribe();
     }
+    
 
     onDateChange(date?:string) {
       if (this.selectedDate) {
         this.getWeatherData(this.cityName, this.selectedDate);
       }
     }
+
+    onUnitsChange() {
+      if (this.weatherSubscription) {
+        this.weatherSubscription.unsubscribe();
+      }
+      if (this.cityName && this.selectedUnits) {
+        this.getWeatherData(this.cityName, this.selectedUnits);
+      }
+    }
+    
+    
   }
 
   
