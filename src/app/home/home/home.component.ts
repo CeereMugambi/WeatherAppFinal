@@ -2,7 +2,7 @@ import { Component,Input } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { tap, map } from 'rxjs/operators';
+import { tap} from 'rxjs/operators';
 
 import { ViewEncapsulation } from '@angular/core';
 
@@ -39,17 +39,16 @@ export class HomeComponent {
 
 
   ngOnInit(): void {
-    this.getWeatherData(this.cityName,this.selectedUnits);
+    this.getWeatherData(this.cityName,this.selectedDate);
     this.cityName = '';
 
   }
   
     onSubmit() {
-      if (this.cityName && this.selectedDate &&this.selectedUnits) {
-        this.getWeatherData(this.cityName,this.selectedUnits);
+      if (this.cityName && this.selectedDate) {
+        this.getWeatherData(this.cityName,this.selectedDate);
         this.cityName = '';
         this.selectedDate = '';
-        this.selectedUnits
       } 
     }
     
@@ -64,7 +63,6 @@ export class HomeComponent {
       ).subscribe();
     }
     
-
     onDateChange(date?:string) {
       if (this.selectedDate) {
         this.getWeatherData(this.cityName, this.selectedDate);
