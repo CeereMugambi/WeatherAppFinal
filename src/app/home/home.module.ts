@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AccountModule,
     ComponentsModule,
     FormsModule,
+    ReactiveFormsModule
 
   ],
   exports:[
