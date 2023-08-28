@@ -10,7 +10,7 @@ import { IweatherData } from '../models';
 export class WeatherService {
   constructor(private http: HttpClient) { }
 
-  getWeatherData(cityName: string): Observable<IweatherData> {
+  getWeatherData(cityName: string, units: string, date?: string): Observable<IweatherData> {
     return this.http.get<IweatherData>(environment.weatherApiBaseUrl, {
       headers: new HttpHeaders()
       .set(environment.weatherApiXRapidAPIHostHeaderName, environment.weatherApiXRapidAPIHostHeaderValue)
