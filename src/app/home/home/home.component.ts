@@ -1,8 +1,8 @@
 import { Component,Input } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Subscription ,BehaviorSubject} from 'rxjs';
 
-import { tap} from 'rxjs/operators';
+import { tap } from 'rxjs';
 
 import { ViewEncapsulation } from '@angular/core';
 
@@ -11,6 +11,11 @@ import { HttpClient } from '@angular/common/http';
 import { WeatherService } from 'src/app/services';
 
 import { IweatherData, iForecastday } from 'src/app/models';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
+
 @Component({ 
   selector:'home',
   templateUrl: 'home.component.html',
@@ -20,7 +25,7 @@ import { IweatherData, iForecastday } from 'src/app/models';
 
 export class HomeComponent {
 
-  constructor(private http: HttpClient, private weatherService: WeatherService) {}
+  constructor(private http: HttpClient, private weatherService: WeatherService,private snackBar: MatSnackBar) {}
 
   @Input() isSelected: boolean = false;
    
@@ -36,45 +41,77 @@ export class HomeComponent {
 
   weatherSubscription: Subscription | undefined;
 
+  errorMessage: string | null = null;
 
+
+  private weatherDataSubject = new BehaviorSubject<IweatherData | null>(null);
 
   ngOnInit(): void {
-    this.getWeatherData(this.cityName,this.selectedDate);
+    this.getWeatherData(this.cityName, this.selectedDate);
     this.cityName = '';
 
+    this.weatherDataSubject.subscribe(response => { //subscribe to the weatherDataSubject
+      if (response) {
+        this.IweatherData = response;
+        console.log(response);
+      }
+    });
   }
   
-    onSubmit() {
-      if (this.cityName && this.selectedDate) {
-        this.getWeatherData(this.cityName,this.selectedDate);
-        this.cityName = '';
-        this.selectedDate = '';
-      } 
-    }
-    
+  onSubmit() {
+    if (!this.selectedDate) {
+      this.errorMessage = 'Please select a date before clicking Submit.';
+      this.openSnackBar(this.errorMessage); // Display the error message as a snackbar
 
-    private getWeatherData(cityName: string, units: string, date?: string) {
-      const request = date ? this.weatherService.getWeatherData(date, cityName) : this.weatherService.getWeatherData(cityName, units); //construct API request
-      this.weatherSubscription = request.pipe( //assigns the subscription property
-        tap(response => { //allow UI update without altering the data itself
-          this.IweatherData = response;
-          console.log(response);
-        })
-      ).subscribe(); //initiate the API call and start receiving data
+      return;
     }
-    
+  
+    if (this.cityName && this.selectedDate) {
+      this.getWeatherData(this.cityName, this.selectedDate);
+      this.cityName = '';
+      this.selectedDate = '';
+      this.openSnackBar('Form submitted successfully!');
+      this.errorMessage = null; // Clear the error message if the submission is successful
+
+    }
+  }
+
     onDateChange(date?:string) {
       if (this.selectedDate) {
         this.getWeatherData(this.cityName, this.selectedDate);
       }
     }
 
+    private getWeatherData(cityName: string, units: string, date?: string) {
+      const request = date ? this.weatherService.getWeatherData(date, cityName) : this.weatherService.getWeatherData(cityName, units);
+      request.pipe(
+        tap(response => {
+          this.weatherDataSubject.next(response); // Emit the fetched weather data to subject
+      })
+      ).subscribe();
+    }
+
     onUnitsChange() {
-      if (this.weatherSubscription) { //checks if there is a current API call
-        this.weatherSubscription.unsubscribe(); //if true unsubscribe 
+      if (this.weatherSubscription) {
+        this.weatherSubscription.unsubscribe(); //unsubscribe from ongoing API call
       }
-      if (this.cityName && this.selectedUnits) {  //check if both of these are available
-        this.getWeatherData(this.cityName, this.selectedUnits); //fetch weather data with new units //triggers new API call
+      if(this.cityName && this.selectedUnits) { //fetch new data with new unit
+        this.getWeatherData(this.cityName, this.selectedUnits); //emits to the behaviour subject for update 
+      }
+    }
+
+    private openSnackBar(message: string) {
+      this.snackBar.open(message, 'Dismiss', {
+        duration: 3000, // Duration in milliseconds
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
+    }
+    
+    
+    ngOnDestroy(): void {
+      if (this.weatherSubscription) {
+        this.weatherSubscription.unsubscribe(); //unsubscribe from any service to avoid memory leaks
       }
     }
     
