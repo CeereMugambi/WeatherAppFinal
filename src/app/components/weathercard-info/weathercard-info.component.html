@@ -1,6 +1,6 @@
 <div class="info-block">
     <div class="info-block-label">
-      <div class="icon-and-feels-like">
+      <div class="icon">
         <img [src]="labelImageSrc" alt="Weather Icon" class="weather-icon">
         <span>{{ labelText }}</span>
       </div>
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="info-block-value">
-      {{ selectedUnits === 'metric' ? value1 : value2 }}
+      {{ temperature[selectedUnits === 'metric' ? 0 : 1 ]}}
       {{ unitSymbols[selectedUnits === 'metric' ? 0 : 1] }} <!-- Reusable unit symbols -->
     </div>
   </div>
