@@ -29,7 +29,6 @@
         <div class="weather-data">
             <div class="temperature">{{ forecastDay.day.maxtemp_c }}°C</div>
             <div class="location">{{ IweatherData.location.name}},{{ IweatherData.location.country}}</div>
-            <!-- <div class="location">{{ IweatherData.location.country}}</div> -->
 
 
         </div>
@@ -40,37 +39,36 @@
             More Information
         </div>
         <div class="more-info-container" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
-            <!-- Additional weather information -->
-            <div class="info-block">
-                <div class="info-block-label">
-                  <div class="icon-and-feels-like">
-                    <img src="../assets/min.png" alt="Feels Like Icon" class="feels-like-icon">
-                    <span>Feels Like</span>
-                  </div>
-                  <div class="unit-selection">
-                    <p>Units:</p>
-                    <mat-button-toggle-group [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()">
-                      <mat-button-toggle value="metric">Celsius</mat-button-toggle>
-                      <mat-button-toggle value="imperial">Fahrenheit</mat-button-toggle>
-                    </mat-button-toggle-group>
-                  </div>
-                </div>
-                <div class="info-block-value">
-                    {{ selectedUnits === 'metric' ? forecastDay.day.mintemp_c : forecastDay.day.mintemp_f }}
-                    {{ selectedUnits === 'metric' ? '°C' : '°F' }}
-                </div>
-              </div>
-              
-              
-            <div class="info-block">
-                <div class="info-block-label">
-                    <img src="../assets/max.png">
-                    <span>max</span>
-                </div>
-                <div class="info-block-value">
-                    {{ forecastDay.day.maxtemp_c}}°C
-                </div>
-            </div>
+      
+               <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/min.png"
+                labelText="Feels Like"
+                [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
+                [unitSymbols]="['°C', '°F']"
+                [value1]="forecastDay.day.avgtemp_c"
+                [value2]="forecastDay.day.avgtemp_f"
+                ></app-weathercard-info>
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/min.png"
+                labelText="Min"
+                [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
+                [unitSymbols]="['°C', '°F']"
+                [value1]="forecastDay.day.mintemp_c"
+                [value2]="forecastDay.day.mintemp_f"
+                ></app-weathercard-info>
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/max.png"
+                labelText="Max"
+                [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
+                [unitSymbols]="['°C', '°F']"
+                [value1]="forecastDay.day.maxtemp_c"
+                [value2]="forecastDay.day.maxtemp_f"
+                ></app-weathercard-info>
     
             <div class="info-block">
                 <div class="info-block-label">
