@@ -1,3 +1,24 @@
+div class="home-container-wrapper">
+      <div class="home-container"*ngIf="IweatherData">
+         <!-- Weather data section -->
+         <div class="upper-data" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
+          <img src="../assets/hot.jpg"*ngIf="forecastDay.day.maxtemp_c > 15">
+          <img src="../assets/cold.jpg"*ngIf="forecastDay.day.mintemp_c < 15">
+    
+        <div class="weather-data">
+            <div class="temperature">{{ forecastDay.day.maxtemp_c }}°C</div>
+            <div class="location">{{ IweatherData.location.name}},{{ IweatherData.location.country}}</div>
+
+
+        </div>
+    </div>
+    
+    <div class="lower-data" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
+        <div class="more-info-label">
+            More Information
+        </div>
+        <div class="more-info-container" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
+
 <div class="info-block">
     <div class="info-block-label">
       <div class="icon">
@@ -6,7 +27,7 @@
       </div>
       <div class="unit-selection">
         <p>Units:</p>
-        <mat-button-toggle-group [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()">
+        <mat-button-toggle-group [(ngModel)]= "selectedUnits" (ngModelChange)="onUnitsChange()">
           <mat-button-toggle *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
