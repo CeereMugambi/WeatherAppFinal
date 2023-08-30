@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { WeatherService } from 'src/app/services';
 import { IweatherData } from 'src/app/models';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-weathercard-info',
@@ -19,6 +20,7 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
   @Input() unitSymbols!: string[];
   selectedUnits: 'metric' | 'imperial' = 'metric';
   @Input() temperature!: number[];
+
   
   cityName: string = '';
   IweatherData?: IweatherData;
@@ -58,14 +60,21 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+
   }
+ 
 
   onUnitsChange() {
+
     if (this.weatherSubscription) {
       this.weatherSubscription.unsubscribe(); // Unsubscribe from ongoing API call
     }
+    // console.log(this.selectedUnits)
     if (this.cityName && this.selectedUnits) {
       this.getWeatherData(this.cityName, this.selectedUnits);
+      console.log(this.selectedUnits);
+      console.log(this.temperature);
+      console.log(this.unitSymbols);
     }
   }
   
