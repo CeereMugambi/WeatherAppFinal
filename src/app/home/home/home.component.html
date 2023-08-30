@@ -46,53 +46,82 @@
                 labelText="Feels Like"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
                 [unitSymbols]="['°C', '°F']"
-                [value1]="forecastDay.day.avgtemp_c"
-                [value2]="forecastDay.day.avgtemp_f"
+                [temperature]="[forecastDay.day.avgtemp_c,forecastDay.day.avgtemp_f]"
+
                 ></app-weathercard-info>
 
                 <app-weathercard-info
                 [forecastDay]="IweatherData"
                 labelImageSrc="../assets/min.png"
-                labelText="Min"
+                labelText="Min temperature"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
                 [unitSymbols]="['°C', '°F']"
-                [value1]="forecastDay.day.mintemp_c"
-                [value2]="forecastDay.day.mintemp_f"
+                [temperature]="[forecastDay.day.mintemp_c,forecastDay.day.mintemp_f]"
+
                 ></app-weathercard-info>
 
                 <app-weathercard-info
                 [forecastDay]="IweatherData"
                 labelImageSrc="../assets/max.png"
-                labelText="Max"
+                labelText="Max temperature"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
                 [unitSymbols]="['°C', '°F']"
-                [value1]="forecastDay.day.maxtemp_c"
-                [value2]="forecastDay.day.maxtemp_f"
+                [temperature]="[forecastDay.day.maxtemp_c,forecastDay.day.maxtemp_f]"
+
                 ></app-weathercard-info>
     
-            <div class="info-block">
-                <div class="info-block-label">
-                    <img src="../assets/humidity.png">
-                    <span>humidity</span>
-                </div>
-                <div class="info-block-value">
-                    {{ forecastDay.day.avghumidity }}% 
-                </div>
-            </div>
-    
-            <div class="info-block">
-                <div class="info-block-label">
-                    <img src="../assets/wind.png">
-                    <span>wind</span>
-                </div>
-                <div class="info-block-value">
-                    {{ forecastDay.day.maxwind_kph }} km/h
-                </div>
-                
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/wind.png"
+                labelText="Wind"
+                [buttonToggleOptions]="['kph', 'mph']"
+                [unitSymbols]="['°C', '°F']"
+                [temperature]="[forecastDay.day.maxwind_kph,forecastDay.day.maxwind_mph]"
+
+                ></app-weathercard-info>
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/min.png"
+                labelText="Feels Like"
+                [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
+                [unitSymbols]="['°C', '°F']"
+                [temperature]="[forecastDay.day.avgtemp_c,forecastDay.day.avgtemp_f]"
+                ></app-weathercard-info>
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/min.png"
+                labelText="Min temperature"
+                [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
+                [unitSymbols]="['°C', '°F']"
+                [temperature]="[forecastDay.day.mintemp_c,forecastDay.day.mintemp_f]"
+
+                ></app-weathercard-info>
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/max.png"
+                labelText="Max temperature"
+                [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
+                [unitSymbols]="['°C', '°F']"
+                [temperature]="[forecastDay.day.maxtemp_c,forecastDay.day.maxtemp_f]"
+
+                ></app-weathercard-info>
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/humidity.png"
+                labelText="Humidity"
+                [buttonToggleOptions]="['%']"
+                [unitSymbols]="['%']"
+                [temperature]="[forecastDay.day.avghumidity,forecastDay.day.avghumidity]"
+
+                ></app-weathercard-info>
+
             </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 
