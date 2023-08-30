@@ -1,1 +1,19 @@
-<p>weathercard-info works!</p>
+<div class="info-block">
+    <div class="info-block-label">
+      <div class="icon-and-feels-like">
+        <img [src]="labelImageSrc" alt="Weather Icon" class="weather-icon">
+        <span>{{ labelText }}</span>
+      </div>
+      <div class="unit-selection">
+        <p>Units:</p>
+        <mat-button-toggle-group [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()">
+          <mat-button-toggle *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <div class="info-block-value">
+      {{ selectedUnits === 'metric' ? value1 : value2 }}
+      {{ unitSymbols[selectedUnits === 'metric' ? 0 : 1] }} <!-- Reusable unit symbols -->
+    </div>
+  </div>
+  
