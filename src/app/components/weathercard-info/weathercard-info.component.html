@@ -6,15 +6,14 @@
         <span>{{ labelText }}</span>
       </div>
       <div class="unit-selection">
-        <p>Units:</p>
         <mat-button-toggle-group [(ngModel)]= "selectedUnits" (ngModelChange)="onUnitsChange()">
           <mat-button-toggle *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
     </div>
     <div class="info-block-value">
-      {{ temperature[selectedUnits === 'metric' ? 0 : 1 ]}}
-      {{ unitSymbols[selectedUnits === 'metric' ? 0 : 1] }} <!-- Reusable unit symbols -->
+      {{ selectedUnits === 'metric' ? temperature[0] : temperature[1] }}
+      {{ selectedUnits === 'metric' ? unitSymbols[0] : unitSymbols[1] }}
     </div>
   </div>
   
