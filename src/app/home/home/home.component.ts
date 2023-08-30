@@ -27,7 +27,7 @@ export class HomeComponent {
 
   constructor(private http: HttpClient, private weatherService: WeatherService,private snackBar: MatSnackBar) {}
 
-  @Input() isSelected: boolean = false;
+  // @Input() isSelected: boolean = false;
    
   cityName:string = 'Nairobi';
   
@@ -37,25 +37,25 @@ export class HomeComponent {
 
   forecastData?: iForecastday[];
 
-  selectedUnits: string = 'metric';
+  // selectedUnits: string = 'metric';
 
-  weatherSubscription: Subscription | undefined;
+  // weatherSubscription: Subscription | undefined;
 
   errorMessage: string | null = null;
 
 
-  private weatherDataSubject = new BehaviorSubject<IweatherData | null>(null);
+  // private weatherDataSubject = new BehaviorSubject<IweatherData | null>(null);
 
   ngOnInit(): void {
     this.getWeatherData(this.cityName, this.selectedDate);
     this.cityName = '';
 
-    this.weatherDataSubject.subscribe(response => { //subscribe to the weatherDataSubject
-      if (response) {
-        this.IweatherData = response;
-        console.log(response);
-      }
-    });
+    // this.weatherDataSubject.subscribe(response => { //subscribe to the weatherDataSubject
+    //   if (response) {
+    //     this.IweatherData = response;
+    //     console.log(response);
+    //   }
+    // });
   }
   
   onSubmit() {
@@ -84,21 +84,15 @@ export class HomeComponent {
 
     private getWeatherData(cityName: string, units: string, date?: string) {
       const request = date ? this.weatherService.getWeatherData(date, cityName) : this.weatherService.getWeatherData(cityName, units);
-      request.pipe(
-        tap(response => {
-          this.weatherDataSubject.next(response); // Emit the fetched weather data to subject
-      })
-      ).subscribe();
+      request.subscribe({
+        next:(response) => {
+          this.IweatherData = response;
+          console.log(response);
+        }
+      });
     }
 
-    onUnitsChange() {
-      if (this.weatherSubscription) {
-        this.weatherSubscription.unsubscribe(); //unsubscribe from ongoing API call
-      }
-      if(this.cityName && this.selectedUnits) { //fetch new data with new unit
-        this.getWeatherData(this.cityName, this.selectedUnits); //emits to the behaviour subject for update 
-      }
-    }
+
 
     private openSnackBar(message: string) {
       this.snackBar.open(message, 'Dismiss', {
@@ -109,11 +103,11 @@ export class HomeComponent {
     }
     
     
-    ngOnDestroy(): void {
-      if (this.weatherSubscription) {
-        this.weatherSubscription.unsubscribe(); //unsubscribe from any service to avoid memory leaks
-      }
-    }
+    // ngOnDestroy(): void {
+    //   if (this.weatherSubscription) {
+    //     this.weatherSubscription.unsubscribe(); //unsubscribe from any service to avoid memory leaks
+    //   }
+    // }
     
     
   }
