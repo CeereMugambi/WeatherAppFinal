@@ -1,77 +1,79 @@
-import { Component,Input,OnInit } from '@angular/core';
-
-import { Subscription ,BehaviorSubject} from 'rxjs';
-
-import { tap } from 'rxjs';
-
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-
 import { WeatherService } from 'src/app/services';
-
-import { IweatherData, iForecastday } from 'src/app/models';
-
+import { IweatherData } from 'src/app/models';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 
 @Component({
   selector: 'app-weathercard-info',
   templateUrl: './weathercard-info.component.html',
   styleUrls: ['./weathercard-info.component.sass']
-  
 })
-export class WeathercardInfoComponent implements OnInit {
-
-  constructor(private http: HttpClient, private weatherService: WeatherService,private snackBar: MatSnackBar) {}
-
+export class WeathercardInfoComponent implements OnInit, OnDestroy {
   @Input() forecastDay!: any;
   @Input() labelImageSrc!: string;
   @Input() labelText!: string;
   @Input() buttonToggleOptions!: string[];
   @Input() unitSymbols!: string[];
   selectedUnits: 'metric' | 'imperial' = 'metric';
-  @Input() value1!: number;
-  @Input() value2!: number;
-  cityName:string = '';
-
-
+  @Input() temperature!: number[];
+  
+  cityName: string = '';
   IweatherData?: IweatherData;
-  weatherSubscription: Subscription | undefined;
+  private weatherSubscription: Subscription | undefined;
 
   private weatherDataSubject = new BehaviorSubject<IweatherData | null>(null);
 
+  constructor(
+    private http: HttpClient,
+    private weatherService: WeatherService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this.weatherDataSubject.subscribe(response => { //subscribe to the weatherDataSubject
+     //initial data fetch when component initializes
+     if (this.cityName && this.selectedUnits) {
+      this.getWeatherData(this.cityName, this.selectedUnits);
+    }
+
+    this.weatherSubscription = this.weatherDataSubject.subscribe(response => {
       if (response) {
         this.IweatherData = response;
         console.log(response);
       }
+     
     });
-      
   }
 
   private getWeatherData(cityName: string, units: string, date?: string) {
-    const request = date ? this.weatherService.getWeatherData(date, cityName) : this.weatherService.getWeatherData(cityName, units);
-    request.pipe(
-      tap(response => {
-        this.weatherDataSubject.next(response); // Emit the fetched weather data to subject
-    })
-    ).subscribe();
+    const request = date
+      ? this.weatherService.getWeatherData(date, cityName)
+      : this.weatherService.getWeatherData(cityName, units);
+    request
+      .pipe(
+        tap(response => {
+          this.weatherDataSubject.next(response);
+        })
+      )
+      .subscribe();
   }
 
-    onUnitsChange() {
-      if (this.weatherSubscription) {
-        this.weatherSubscription.unsubscribe(); //unsubscribe from ongoing API call
-      }
-      if(this.cityName && this.selectedUnits) { //fetch new data with new unit
-        this.getWeatherData(this.cityName, this.selectedUnits); //emits to the behaviour subject for update 
-      }
+  onUnitsChange() {
+    if (this.weatherSubscription) {
+      this.weatherSubscription.unsubscribe(); // Unsubscribe from ongoing API call
     }
-
-    ngOnDestroy(): void {
-      if (this.weatherSubscription) {
-        this.weatherSubscription.unsubscribe(); //unsubscribe from any service to avoid memory leaks
-      }
+    if (this.cityName && this.selectedUnits) {
+      this.getWeatherData(this.cityName, this.selectedUnits);
     }
+  }
+  
 
+  ngOnDestroy(): void {
+    if (this.weatherSubscription) {
+      this.weatherSubscription.unsubscribe();
+    }
+  }
+  
 }
