@@ -1,29 +1,35 @@
-.info-block 
-  width: 50%
+
+.info-block
+  padding: 15px
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+
+.info-block-label
   display: flex
   flex-direction: row
-  justify-content: space-between
   align-items: center
-  margin-bottom: 20px
+  justify-content: space-between
+  width: 100%
 
-.info-block-label img
-  width: 1.5em
+.icon img
+  width: 1.9em
 
-.info-block-label span
+.icon img.weather-icon 
+  width: 2em
+
+.icon span
   color: var(--black)
-  font-size: 0.8em
+  font-size: 1em
+  font-weight: bold
+
+.unit-selection 
+  margin-left: 10px
 
 .info-block-value
-    display: flex
-    flex-direction: column
-    align-items: center
-    margin-top: 10px
-
-.value 
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin-top: 5px
   font-weight: bold
-  margin-bottom: 5px
-
-.app-weathercard-info 
-  width: calc(33.33% - 30px) /* Adjust the percentage width and margin as needed */
-  margin-bottom: 20px
-
+  font: 1em sans-serif
