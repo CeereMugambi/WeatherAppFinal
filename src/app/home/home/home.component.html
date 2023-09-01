@@ -20,7 +20,7 @@
   </div>
 
   <div class="home-container-wrapper">
-      <div class="home-container"*ngIf="IweatherData">
+      <div class="home-container" *ngIf="IweatherData">
          <!-- Weather data section -->
          <div class="upper-data" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
           <img src="../assets/hot.jpg"*ngIf="forecastDay.day.maxtemp_c > 15">
@@ -34,10 +34,8 @@
         </div>
     </div>
     
-    <!-- <div class="lower-data" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
-        <div class="more-info-label">
-            More Information -->
-        <!-- </div> -->
+    <div class="lower-data" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
+      
         <div class="more-info-container" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
                <app-weathercard-info
                 [forecastDay]="IweatherData"
@@ -46,7 +44,6 @@
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
                 unitSymbols="['°C', '°F']"
                 [values]="[forecastDay.day.avgtemp_c,forecastDay.day.avgtemp_f]"
-
                 ></app-weathercard-info>
 
                 <app-weathercard-info
