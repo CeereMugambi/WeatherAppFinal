@@ -12,6 +12,13 @@
   --turquoise: #4fe7d7
   --black: #1c1c1e
 
+
+.page-content 
+  margin-top: 20px
+  background-color: transparent
+  position: relative
+
+
 /* Top Section */
 .top-section
   display: flex
@@ -40,19 +47,22 @@
   font-size: 14px
   display: flex
   margin-top: -30px
+  z-index: 1
+
+.home-container-wrapper 
+  padding-top: 20px
 
 .home-container
   font-family: Verdana, Geneva, Tahoma, sans-serif
   font-size: 16px
   width: 1000px
   height: 120vh
+  overflow-y: auto
   border-radius: 10px
   box-shadow: 10px 10px 10px var(--shadow-dark)
   margin: -50px auto 0 auto 
   display: flex
   flex-direction: column
-  justify-content: center
-  align-items: center
   overflow: hidden
   
 
@@ -90,7 +100,6 @@
 /* Weather Data Section */
 .weather-data
   position: relative
-  z-index: 1
   width: 100%
   height: 100%
   background-color: var(--shadow-dark)
@@ -110,13 +119,6 @@
   font-size: 4em
   text-align: center
   font-weight: 900
-
-/* More Info Section */
-.more-info-label
-  color: var(--black)
-  text-align: center
-  font-weight: bold
-  font-size: 1.5em
 
 .more-info-container
   flex: 1
