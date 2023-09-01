@@ -12,12 +12,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./weathercard-info.component.sass']
 })
 export class WeathercardInfoComponent implements OnInit, OnDestroy {
+  @Input() weatherData?: IweatherData;
   @Input() forecastDay!: any;
   @Input() labelImageSrc!: string;
   @Input() labelText!: string;
   @Input() buttonToggleOptions!: string[];
   unitSymbols!: string[];
-  selectedUnits: 'metric' | 'imperial' = 'metric';
+  selectedUnits='Celcius'  
   @Input() values!: number[];
 
   
@@ -26,6 +27,8 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
   private weatherSubscription: Subscription | undefined;
 
   private weatherDataSubject = new BehaviorSubject<IweatherData | null>(null);
+  data$ = this.weatherDataSubject.asObservable();
+
 
   constructor(
     private http: HttpClient,
@@ -50,8 +53,8 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
     request
       .pipe(
         tap(response => {
-          console.log('API Response:', response);
           this.weatherDataSubject.next(response);
+
         })
       );
 
@@ -62,12 +65,10 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
       this.weatherSubscription.unsubscribe(); // Unsubscribe from ongoing API call
     }
     
-    console.log('Values:', this.values);
 
-    if (this.cityName && this.selectedUnits) {
+    if (this.selectedUnits) {
       this.getWeatherData(this.cityName, this.selectedUnits);
-      console.log('Values:', this.values);
-
+      console.log(this.selectedUnits)
 
 
     }
