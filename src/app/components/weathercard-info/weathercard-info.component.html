@@ -6,8 +6,8 @@
         <span>{{ labelText }}</span>
       </div>
       <div class="unit-selection">
-        <mat-button-toggle-group appearance="legacy" [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()" color="primary">
-          <mat-button-toggle color="primary" *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
+        <mat-button-toggle-group appearance="legacy" color="primary"[(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()" color="primary">
+          <mat-button-toggle  *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
         <div class="info-block-value">
