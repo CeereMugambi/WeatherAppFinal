@@ -1,3 +1,4 @@
+
 <div class="info-block">
     <div class="info-block-label">
       <div class="icon">
@@ -5,13 +6,14 @@
         <span>{{ labelText }}</span>
       </div>
       <div class="unit-selection">
-        <mat-button-toggle-group [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()">
-          <mat-button-toggle *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
+        <mat-button-toggle-group [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()" color="primary">
+          <mat-button-toggle color="primary" *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
         <div class="info-block-value">
-          {{ selectedUnits === 'metric' ? values[0] + '°C' : values[1] + '°F' }}
+        {{ selectedUnits === 'Celsius' ? values[0] + '°C' : values[1]+ '°F' }}
         </div>
+        
       </div>
       </div>
 
