@@ -18,7 +18,8 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
   @Input() labelText!: string;
   @Input() buttonToggleOptions!: string[];
   unitSymbols!: string[];
-  selectedUnits='Celcius'  
+  selectedUnits='';
+  
   @Input() values!: number[];
 
   
