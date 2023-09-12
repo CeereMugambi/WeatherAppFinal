@@ -34,9 +34,8 @@
         </div>
     </div>
     
-    <div class="lower-data" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
-      
-        <div class="more-info-container" *ngFor="let forecastDay of IweatherData.forecast.forecastday" >
+    <div class="lower-data" *ngFor="let forecastDay of IweatherData.forecast.forecastday">
+        <div class="more-info-container" *ngFor="let forecastDay of IweatherData.forecast.forecastday">
           <div class="temperature-info">
                <app-weathercard-info
                 [forecastDay]="IweatherData"
@@ -44,6 +43,7 @@
                 labelText="Feels Like"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
                 [UnitSymbols]="['°C', '°F']"
+                [toggleRequired]="true"
                 [values]="[forecastDay.day.avgtemp_c,forecastDay.day.avgtemp_f]"
                 ></app-weathercard-info>
 
@@ -53,8 +53,8 @@
                 labelText="Min temperature"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
                 [UnitSymbols]="['°C', '°F']"
+                [toggleRequired]="true"
                 [values]="[forecastDay.day.mintemp_c,forecastDay.day.mintemp_f]"
-
                 ></app-weathercard-info>
 
                 <app-weathercard-info
@@ -62,9 +62,9 @@
                 labelImageSrc="../assets/max.png"
                 labelText="Max temperature"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
+                [toggleRequired]="true"
                 [UnitSymbols]="['°C', '°F']"
                 [values]="[forecastDay.day.maxtemp_c,forecastDay.day.maxtemp_f]"
-
                 ></app-weathercard-info>
 
                 <app-weathercard-info
@@ -73,6 +73,7 @@
                 labelText="Avg Temperature"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
                 [UnitSymbols]="['°C', '°F']"
+                [toggleRequired]="true"
                 [values]="[forecastDay.day.avgtemp_c,forecastDay.day.avgtemp_f]"
                 ></app-weathercard-info>
               </div>
@@ -84,40 +85,39 @@
                 labelText="Wind"
                 [buttonToggleOptions]="['kph', 'mph']"
                 [UnitSymbols]="['kph','mph']"
+                [toggleRequired]="true"
                 [values]="[forecastDay.day.maxwind_kph,forecastDay.day.maxwind_mph]"
-
-                ></app-weathercard-info>
-
-                <app-weathercard-info
-                [forecastDay]="IweatherData"
-                labelImageSrc="../assets/winddegree.png"
-                labelText="Wind Degree"
-                [values]="[IweatherData.current.wind_degree]"
-                ></app-weathercard-info>
-
-
-                <app-weathercard-info
-                [forecastDay]="IweatherData"
-                labelImageSrc="../assets/humidity.png"
-                labelText="Humidity"
-                [values]="[forecastDay.day.avghumidity]"
-
                 ></app-weathercard-info>
 
                 <app-weathercard-info
                 [forecastDay]="IweatherData"
                 labelImageSrc="../assets/rain.png"
                 labelText="Precipitation"
-                [values]="[IweatherData.current.precip_mm]"
+                [buttonToggleOptions]="['mm','in']"
+                [UnitSymbols]="['mm','in']"
+                [toggleRequired]="true"
+                [values]="[IweatherData.current.precip_mm,IweatherData.current.precip_in]"
+                ></app-weathercard-info>
 
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/winddegree.png"
+                labelText="Wind Degree"
+                [toggleRequired]="false"
+                [values]="[IweatherData.current.wind_degree]"
+                ></app-weathercard-info>
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/humidity.png"
+                labelText="Humidity"
+                [toggleRequired]="false"
+                [values]="[forecastDay.day.avghumidity]" 
                 ></app-weathercard-info>
                 </div>
-
-
-
             </div>
         </div>
     </div>
 </div>
-<!-- </div> -->
+</div>
 
