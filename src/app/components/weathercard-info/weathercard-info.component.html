@@ -4,13 +4,13 @@
       <img [src]="labelImageSrc" alt="Weather Icon" class="weather-icon">
       <span>{{ labelText }}</span>
     </div>
-    <div class="unit-selection">
+    <div class="unit-selection" *ngIf="toggleRequired">
       <mat-button-toggle-group appearance="legacy" color="primary" [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()" color="primary">
         <mat-button-toggle *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
     <div class="info-block-value">
-      {{ selectedUnits ===  buttonToggleOptions[0] ? values[0] + UnitSymbols[0] : values[1] + UnitSymbols[1] }}
+      {{ toggleRequired ? (selectedUnits === buttonToggleOptions[0] ? values[0] + UnitSymbols[0] : values[1] + UnitSymbols[1]) : values[0] + UnitSymbols[0] }}
     </div>
   </div>
 </div>
