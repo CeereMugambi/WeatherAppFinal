@@ -43,7 +43,7 @@
                 labelImageSrc="../assets/sun.png"
                 labelText="Feels Like"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
-                unitSymbols="['°C', '°F']"
+                [UnitSymbols]="['°C', '°F']"
                 [values]="[forecastDay.day.avgtemp_c,forecastDay.day.avgtemp_f]"
                 ></app-weathercard-info>
 
@@ -52,7 +52,7 @@
                 labelImageSrc="../assets/min.png"
                 labelText="Min temperature"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
-                unitSymbols="['°C', '°F']"
+                [UnitSymbols]="['°C', '°F']"
                 [values]="[forecastDay.day.mintemp_c,forecastDay.day.mintemp_f]"
 
                 ></app-weathercard-info>
@@ -62,7 +62,7 @@
                 labelImageSrc="../assets/max.png"
                 labelText="Max temperature"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
-                unitSymbols="['°C', '°F']"
+                [UnitSymbols]="['°C', '°F']"
                 [values]="[forecastDay.day.maxtemp_c,forecastDay.day.maxtemp_f]"
 
                 ></app-weathercard-info>
@@ -72,7 +72,7 @@
                 labelImageSrc="../assets/avgtemp.png"
                 labelText="Avg Temperature"
                 [buttonToggleOptions]="['Celsius', 'Fahrenheit']"
-                unitSymbols="['°C', '°F']"
+                [UnitSymbols]="['°C', '°F']"
                 [values]="[forecastDay.day.avgtemp_c,forecastDay.day.avgtemp_f]"
                 ></app-weathercard-info>
               </div>
@@ -83,7 +83,7 @@
                 labelImageSrc="../assets/wind.png"
                 labelText="Wind"
                 [buttonToggleOptions]="['kph', 'mph']"
-                unitSymbols="['kph','mph']"
+                [UnitSymbols]="['kph','mph']"
                 [values]="[forecastDay.day.maxwind_kph,forecastDay.day.maxwind_mph]"
 
                 ></app-weathercard-info>
