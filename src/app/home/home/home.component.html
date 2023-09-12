@@ -77,23 +77,43 @@
                 ></app-weathercard-info>
               </div>
 
-              <div class="Other-phenomenon">
+              <div class="wind-info">
                 <app-weathercard-info
                 [forecastDay]="IweatherData"
                 labelImageSrc="../assets/wind.png"
                 labelText="Wind"
+                [buttonToggleOptions]="['kph', 'mph']"
+                unitSymbols="['kph','mph']"
                 [values]="[forecastDay.day.maxwind_kph,forecastDay.day.maxwind_mph]"
 
                 ></app-weathercard-info>
 
                 <app-weathercard-info
                 [forecastDay]="IweatherData"
+                labelImageSrc="../assets/winddegree.png"
+                labelText="Wind Degree"
+                [values]="[IweatherData.current.wind_degree]"
+                ></app-weathercard-info>
+
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
                 labelImageSrc="../assets/humidity.png"
                 labelText="Humidity"
-                [values]="[forecastDay.day.avghumidity,forecastDay.day.avghumidity]"
+                [values]="[forecastDay.day.avghumidity]"
+
+                ></app-weathercard-info>
+
+                <app-weathercard-info
+                [forecastDay]="IweatherData"
+                labelImageSrc="../assets/rain.png"
+                labelText="Precipitation"
+                [values]="[IweatherData.current.precip_mm]"
 
                 ></app-weathercard-info>
                 </div>
+
+
 
             </div>
         </div>
