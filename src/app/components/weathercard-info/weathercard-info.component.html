@@ -1,20 +1,16 @@
-
 <div class="info-block">
-    <div class="info-block-label">
-      <div class="icon">
-        <img [src]="labelImageSrc" alt="Weather Icon" class="weather-icon">
-        <span>{{ labelText }}</span>
-      </div>
-      <div class="unit-selection">
-        <mat-button-toggle-group appearance="legacy" color="primary"[(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()" color="primary">
-          <mat-button-toggle  *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-        <div class="info-block-value">
-        {{ selectedUnits === 'Celsius' ? values[0] + '°C' : values[1]+ '°F' }}
-        </div>
-        
-      </div>
-      </div>
-
-  
+  <div class="info-block-label">
+    <div class="icon">
+      <img [src]="labelImageSrc" alt="Weather Icon" class="weather-icon">
+      <span>{{ labelText }}</span>
+    </div>
+    <div class="unit-selection">
+      <mat-button-toggle-group appearance="legacy" color="primary" [(ngModel)]="selectedUnits" (ngModelChange)="onUnitsChange()" color="primary">
+        <mat-button-toggle *ngFor="let option of buttonToggleOptions" [value]="option">{{ option }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="info-block-value">
+      {{ selectedUnits ===  buttonToggleOptions[0] ? values[0] + UnitSymbols[0] : values[1] + UnitSymbols[1] }}
+    </div>
+  </div>
+</div>

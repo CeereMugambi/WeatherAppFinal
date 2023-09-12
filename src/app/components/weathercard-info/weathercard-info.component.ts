@@ -17,10 +17,10 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
   @Input() labelImageSrc!: string;
   @Input() labelText!: string;
   @Input() buttonToggleOptions!: string[];
-  unitSymbols!: string[];
-  selectedUnits = 'Celsius';
-  
+  @Input() UnitSymbols!: string[];
+  selectedUnits!:string;
   @Input() values!: number[];
+
 
   
   cityName: string = '';
@@ -37,11 +37,13 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar
   ) {}
 
+  
     ngOnInit(): void {
       this.weatherSubscription = this.weatherDataSubject.subscribe(response => {
         if (response) {
           this.IweatherData = response;
           this.values = [this.values[0], this.values[1]];
+          console.log(this.selectedUnits)
         }
      
     });
