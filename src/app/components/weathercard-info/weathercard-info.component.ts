@@ -20,6 +20,8 @@ export class WeathercardInfoComponent implements OnInit, OnDestroy {
   @Input() UnitSymbols!: string[];
   selectedUnits!:string;
   @Input() values!: number[];
+  @Input() toggleRequired: boolean = false;
+
 
 
   
